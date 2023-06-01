@@ -1,13 +1,17 @@
 import { Routes, Route } from "react-router-dom";
 
-import { SignIn } from "../pages/SignIn";
+import { Home } from "../pages/Home";
 import { CreateChar } from "../pages/CreateChar";
+import { Hashiras } from "../pages/Hashiras";
+import { Onis } from "../pages/Onis";
 
 export function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<SignIn />} />
-      <Route path="/create$character" element={<CreateChar />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/create" element={<CreateChar />} />
+      <Route path="/hashiras" element={<Hashiras />} />
+      <Route path="/onis" element={<Onis />} />
     </Routes>
   );
 }
