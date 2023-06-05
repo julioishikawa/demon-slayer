@@ -7,6 +7,7 @@ import { CreateOni } from "../pages/CreateOni";
 import { Hashiras } from "../pages/Hashiras";
 import { Onis } from "../pages/Onis";
 import { Details } from "../pages/Details";
+import { Profile } from "../pages/Profile";
 
 export function AppRoutes() {
   return (
@@ -15,9 +16,10 @@ export function AppRoutes() {
       <Route path="/create" element={<CreateChar />} />
       <Route path="/createhashira" element={<CreateHashira />} />
       <Route path="/createoni" element={<CreateOni />} />
+      <Route path="/details/:id" element={<Details />} />
       <Route path="/hashiras" element={<Hashiras />} />
       <Route path="/onis" element={<Onis />} />
-      <Route path="/details/:id" element={<Details />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 }

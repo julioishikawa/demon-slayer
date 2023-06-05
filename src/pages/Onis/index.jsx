@@ -6,10 +6,13 @@ import { Container, Content, Wrapper } from "./styles";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { OniNote } from "../../components/OniNote";
-import { Tag } from "../../components/Tag";
 
 export function Onis() {
   const navigate = useNavigate();
+
+  function handleDetails() {
+    navigate(`/details/1`);
+  }
 
   function handleBack() {
     navigate(-1);
@@ -31,8 +34,11 @@ export function Onis() {
       </Wrapper>
 
       <Content>
-        <OniNote title="Akaza" description="dwqkdopwkodp"></OniNote>
-        <OniNote />
+        <OniNote
+          title="Akaza"
+          description="dwqkdopwkodp"
+          onClick={handleDetails}
+        />
       </Content>
     </Container>
   );

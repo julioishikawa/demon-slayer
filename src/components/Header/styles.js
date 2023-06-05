@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const Container = styled.header`
-  height: 100px;
+  min-height: 100px;
   width: 100%;
 
   display: flex;

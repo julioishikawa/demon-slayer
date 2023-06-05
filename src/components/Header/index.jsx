@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 
-
 import { Container, Logo, Search, Profile, Content } from "./styles";
 import logo from "../../assets/logo.svg";
+import avatar from "../../assets/avatar.jpg";
 
 export function Header({ children }) {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ export function Header({ children }) {
         </div>
 
         <Profile to="/profile">
-          <img src={logo} alt="logo" />
+          <img src={avatar} alt="avatar" />
         </Profile>
       </Content>
     </Container>

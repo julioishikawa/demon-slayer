@@ -8,13 +8,30 @@ export const Container = styled.div`
   flex-direction: column;
 `;
 
+export const Content = styled.div`
+  margin: 10px 144px;
+  padding: 40px;
+
+  background-color: black;
+  border-radius: 10px;
+
+  img {
+    width: 50%;
+
+    border: 1px solid white;
+    border-radius: 8px;
+  }
+
+  p {
+    margin: 30px 0 40px 0;
+  }
+`;
+
 export const Wrapper = styled.div`
-  width: 100%;
-
-  padding: 40px 144px;
-
   display: flex;
   justify-content: space-between;
+
+  margin-bottom: 24px;
 
   button {
     display: flex;
@@ -28,12 +45,25 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const Content = styled.div`
-  width: 100%;
+export const Infos = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
-  padding: 0 144px;
+  margin-top: 10px;
+`;
 
-  p {
-    margin-bottom: 40px;
+export const Scrollbar = styled.div`
+  margin: 2px 5px 0 0;
+
+  overflow-y: auto;
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.COLORS.PINK};
+    border-radius: 8px;
   }
 `;

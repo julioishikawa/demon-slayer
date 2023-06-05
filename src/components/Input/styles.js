@@ -10,6 +10,11 @@ export const Container = styled.div`
 
   border-radius: 10px;
 
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
   > input {
     width: 100%;
     height: 56px;

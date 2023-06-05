@@ -8,19 +8,8 @@ export const Container = styled.div`
   flex-direction: column;
 
   main {
-    margin: 0 140px;
+    margin: 0 344px;
     padding: 0 16px 0 0;
-
-    overflow-y: auto;
-
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background-color: ${({ theme }) => theme.COLORS.PINK};
-      border-radius: 8px;
-    }
   }
 `;
 
@@ -84,5 +73,20 @@ export const Form = styled.form`
     button {
       margin: 0;
     }
+  }
+`;
+
+export const Scrollbar = styled.div`
+  margin: 2px 5px 0 0;
+
+  overflow-y: auto;
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.COLORS.PINK};
+    border-radius: 8px;
   }
 `;
