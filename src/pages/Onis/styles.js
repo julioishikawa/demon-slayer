@@ -17,6 +17,10 @@ export const Wrapper = styled.div`
   justify-content: space-between;
 
   button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
     margin-right: 8px;
 
     background: none;

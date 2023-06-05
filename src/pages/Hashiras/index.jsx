@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { FiSearch } from "react-icons/fi";
+import { FiSearch, FiArrowLeft } from "react-icons/fi";
 
 import { Container, Content, Wrapper } from "./styles";
 
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
-import { Note } from "../../components/Note";
+import { HashiraNote } from "../../components/HashiraNote";
 
 export function Hashiras() {
   const navigate = useNavigate();
@@ -24,13 +24,14 @@ export function Hashiras() {
         <h1>Hashira's Ranking</h1>
 
         <button type="button" onClick={handleBack}>
+          <FiArrowLeft />
           Back
         </button>
       </Wrapper>
 
       <Content>
-        <Note />
-        <Note />
+        <HashiraNote title="Rengoku" description="dskdoawkdaw" />
+        <HashiraNote />
       </Content>
     </Container>
   );
