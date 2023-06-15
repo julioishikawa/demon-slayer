@@ -6,11 +6,33 @@ export const Container = styled.div`
 
   display: flex;
   flex-direction: column;
-  align-items: center;
 
   padding: 40px 0;
 
   background: ${({ theme }) => theme.COLORS.BACKGROUND_500};
+
+  > header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    > h1 {
+      text-align: center;
+    }
+
+    > button {
+      margin-left: 100px;
+
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      background: none;
+      border: none;
+
+      color: ${({ theme }) => theme.COLORS.PINK};
+    }
+  }
 `;
 
 export const Content = styled.div`

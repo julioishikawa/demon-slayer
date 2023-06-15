@@ -1,12 +1,21 @@
+import { useNavigate } from "react-router-dom";
+
+
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { Textarea } from "../../components/Textarea";
 import { NoteItem } from "../../components/NoteItem";
-
-import { Container, Form, Scrollbar } from "./styles";
 import { Button } from "../../components/Button";
 
+import { Container, Form, Scrollbar } from "./styles";
+
 export function CreateOni() {
+  const navigate = useNavigate();
+
+  function handleBack() {
+    navigate(-1);
+  }
+  
   return (
     <Container>
       <Header />
@@ -51,7 +60,7 @@ export function CreateOni() {
 
             <div className="buttons">
               <Button title="Create" />
-              <Button title="Delete" />
+              <Button title="Delete" onClick={handleBack} />
             </div>
           </Form>
         </main>
