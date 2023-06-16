@@ -9,21 +9,16 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  margin: 10px 144px;
-  padding: 40px;
+  margin: 0 144px 10px 144px;
+  padding: 30px 40px 40px 40px;
 
   background-color: black;
-  border-radius: 10px;
+  border-radius: 0 0 10px 10px;
 
   img {
     width: 50%;
 
     border: 1px solid white;
-    border-radius: 8px;
-  }
-
-  p {
-    margin: 30px 0 40px 0;
   }
 `;
 
@@ -51,6 +46,14 @@ export const Infos = styled.div`
   gap: 10px;
 
   margin-top: 10px;
+
+  > h2 {
+    margin-top: 20px;
+  }
+
+  > p {
+    margin-bottom: 30px;
+  }
 `;
 
 export const Scrollbar = styled.div`

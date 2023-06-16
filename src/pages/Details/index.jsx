@@ -39,6 +39,7 @@ export function Details() {
             <span>Weight: 74 kg (163 lb)</span>
             <span>Skills: Blood Demon Art</span>
 
+            <h2>Sobre</h2>
             <p>
               Akaza é um demônio de alto nível que aparece durante o arco do
               Trem Infinito. Ele se mostrou como um demônio focado em combate

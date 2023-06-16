@@ -1,15 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/auth";
 
 import { Container, Logo, Search, Profile, Content } from "./styles";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.jpg";
 
 export function Header({ children }) {
-  const navigate = useNavigate();
-
-  function handleBack() {
-    navigate(-1);
-  }
+  const { signOut } = useAuth();
 
   return (
     <Container>
@@ -25,7 +22,7 @@ export function Header({ children }) {
             <strong>shuhari</strong>
           </Link>
 
-          <Link to="/">Logout</Link>
+          <Link to="/" onClick={signOut}>Logout</Link>
         </div>
 
         <Profile to="/profile">
