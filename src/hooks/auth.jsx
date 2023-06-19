@@ -15,9 +15,9 @@ function AuthProvider({ children }) {
       localStorage.setItem("@demon-slayer:user", JSON.stringify(user));
       localStorage.setItem("@demon-slayer:token", token);
 
-      api.defaults.headers.authorization = `Bearer ${token}`;
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
       setData({ user, token });
-      
     } catch(e) {
       if (e.response) {
         alert(e.response.data.message);
@@ -39,7 +39,7 @@ function AuthProvider({ children }) {
     const token = localStorage.getItem("@demon-slayer:token");
 
     if (user && token) {
-      api.defaults.headers.authorization = `Bearer ${token}`;
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
       setData({
         user: JSON.parse(user),
@@ -48,8 +48,33 @@ function AuthProvider({ children }) {
     }
   }, []);
 
+  async function updateProfile({ user, avatarFile }) {
+    try {
+      if (avatarFile) {
+        const fileUploadForm = new FormData();
+        fileUploadForm.append("avatar", avatarFile);
+        
+        const response = await api.patch("/users/avatar", fileUploadForm);
+        user.avatar = response.data.avatar;
+      }
+
+      await api.put("/users", user);
+
+      localStorage.setItem("@demon-slayer:user", JSON.stringify(user));
+
+      setData({ user, token: data.token });
+      alert("Profile updated!");
+    } catch(e) {
+      if (e.response) {
+        alert(e.response.data.message);
+      } else {
+        alert("Could not update profile.");
+      }
+    }
+  }
+
   return(
-    <AuthContext.Provider value={{ signIn, signOut, user: data.user }}>
+    <AuthContext.Provider value={{ signIn, signOut, updateProfile, user: data.user }}>
       {children}
     </AuthContext.Provider>
   );
