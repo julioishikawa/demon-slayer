@@ -11,7 +11,7 @@ export function Hashiras() {
   const navigate = useNavigate();
 
   function handleBack() {
-    navigate(-1);
+    navigate("/");
   }
 
   return (

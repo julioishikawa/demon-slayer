@@ -26,7 +26,7 @@ export function CreateChar() {
       
       <Content>
         <div>
-          <h2>Hashiras</h2>
+          <h2>GOOD</h2>
           <Link to="/createhashira">
             <img src={hashira} alt="hashira picture" />
           </Link>
@@ -35,7 +35,7 @@ export function CreateChar() {
         <h2>or</h2>
 
         <div>
-          <h2>Onis</h2>
+          <h2>EVIL</h2>
           <Link to="/createoni">
             <img src={oni} alt="oni picture" />
           </Link>

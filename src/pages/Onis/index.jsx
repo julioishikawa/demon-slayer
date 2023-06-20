@@ -15,7 +15,7 @@ export function Onis() {
   }
 
   function handleBack() {
-    navigate(-1);
+    navigate("/");
   }
 
   return (
