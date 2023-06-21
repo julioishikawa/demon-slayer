@@ -50,14 +50,10 @@ export const Infos = styled.div`
   > h2 {
     margin-top: 20px;
   }
-
-  > p {
-    margin-bottom: 30px;
-  }
 `;
 
 export const Scrollbar = styled.div`
-  margin: 2px 5px 0 0;
+
 
   overflow-y: auto;
 
@@ -67,6 +63,5 @@ export const Scrollbar = styled.div`
 
   ::-webkit-scrollbar-thumb {
     background-color: ${({ theme }) => theme.COLORS.PINK};
-    border-radius: 8px;
   }
 `;

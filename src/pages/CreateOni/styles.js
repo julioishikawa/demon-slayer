@@ -60,12 +60,12 @@ export const Form = styled.form`
 
     margin-bottom: 50px;
 
-    > :nth-child(1) {
+    > :nth-child(2) {
       background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
       color: ${({ theme }) => theme.COLORS.PINK};
       transition: all 0.3s;
 
-      :nth-child(1):hover {
+      :nth-child(2):hover {
         background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
       }
     }

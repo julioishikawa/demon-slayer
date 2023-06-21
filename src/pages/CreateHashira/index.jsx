@@ -19,6 +19,7 @@ export function CreateHashira() {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
   const [description, setDescription] = useState("");
+  const [style, setStyle] = useState("");
   const [goals, setGoals] = useState("");
 
   const [tags, setTags] = useState([]);
@@ -27,6 +28,7 @@ export function CreateHashira() {
   const isAgeValid = age >= 18 && age <= 40 || age === "?";
   const isHeightValid = height >= 1 && height <= 3 || height === "?";
   const isWeightValid = weight >= 40 && weight <= 595 || weight === "?";
+  const isTagValid = newTag.length >= 3 && newTag.length <= 20 || newTag === "?";
 
   const navigate = useNavigate();
 
@@ -35,20 +37,24 @@ export function CreateHashira() {
       return alert("You need to put a value to add a ability.");
     }
 
+    if (!isTagValid) {
+      return alert("Your skill must be between 3 and 20 letters.");
+    }
+
     setTags((prevState) => [
       ...prevState, 
-      newTag
+      newTag,
     ]);
 
     setNewTag("");
   }
 
   function handleRemoveTag(tagDeleted) {
-    setTags(prevState => prevState.filter((tag) => tag.id !== tagDeleted.id));
+    setTags(prevState => prevState.filter((tag) => tag !== tagDeleted));
   }
 
   async function handleNewNote() {
-    if (!name || !age || !gender || !form || !height || !weight  || !description || !goals) {
+    if (!name || !age || !gender || !form || !height || !weight  || !description || !style || !goals) {
       return alert("Please fill in all fields to complete your character.");
     }
 
@@ -57,21 +63,21 @@ export function CreateHashira() {
     }
 
     if (!isHeightValid) {
-      return alert("Your height must be between 1 meters and 3 meters.");
+      return alert("Your height must be between 1 and 3 meters.");
     }
 
     if(!isWeightValid) {
       return alert("Your weight must be between 40 and 595 kilograms.");
     }
 
+    if (tags.length === 0) {
+      return alert("You need to create a ability for your character.");
+    }
+
     if (newTag) {
       return alert(
         'You left one ability in the field to be add. Please click in the "+" button to add it or left the field empty.'
       );
-    }
-
-    if (tags.length === 0) {
-      return alert("You need to create a ability for your character.");
     }
 
     await api.post("/notes", {
@@ -82,6 +88,7 @@ export function CreateHashira() {
       height,
       weight,
       description,
+      style,
       tags,
       goals,
     });
@@ -125,6 +132,9 @@ export function CreateHashira() {
 
             <Textarea placeholder="About" onChange={e => setDescription(e.target.value)} />
 
+            <h2>Style</h2>
+            <Input placeholder="Example: Flame's Breathing" onChange={e => setStyle(e.target.value)} />
+
             <div>
               <h2>Skills</h2>
               <div className="tags">
@@ -139,7 +149,7 @@ export function CreateHashira() {
                 }
                 <NoteItem 
                   isNew 
-                  placeholder="Example: Flame Breathing" 
+                  placeholder="Example: Dancing Flaming" 
                   onChange={e => setNewTag(e.target.value)}
                   value={newTag}
                   onClick={handleAddTag}

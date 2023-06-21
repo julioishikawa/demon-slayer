@@ -19,6 +19,7 @@ export function CreateOni() {
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
   const [description, setDescription] = useState("");
+  const [style, setStyle] = useState("");
   const [goals, setGoals] = useState("");
 
   const [tags, setTags] = useState([]);
@@ -27,12 +28,17 @@ export function CreateOni() {
   const isAgeValid = age >= 4 && age <= 799 || age === "?";
   const isHeightValid = height >= 0.100 && height <= 50 || height === "?";
   const isWeightValid = weight >= 10 && weight <= 999 || weight === "?";
+  const isTagValid = newTag.length >= 3 && newTag.length <= 20 || newTag === "?";
 
   const navigate = useNavigate();
 
   function handleAddTag() {
     if (!newTag) {
       return alert("You need to put a value to add a ability.");
+    }
+
+    if (!isTagValid) {
+      return alert("Your skill must be between 3 and 20 letters.");
     }
 
     setTags((prevState) => [
@@ -48,7 +54,7 @@ export function CreateOni() {
   }
 
   async function handleNewNote() {
-    if (!name || !age || !gender || !form || !height || !weight  || !description || !goals) {
+    if (!name || !age || !gender || !form || !height || !weight  || !description || !style || !goals) {
       return alert("Please fill in all fields to complete your character.");
     }
 
@@ -82,6 +88,7 @@ export function CreateOni() {
       height,
       weight,
       description,
+      style,
       tags,
       goals,
     });
@@ -125,6 +132,9 @@ export function CreateOni() {
 
             <Textarea placeholder="About" onChange={e => setDescription(e.target.value)} />
 
+            <h2>Style</h2>
+            <Input placeholder="Example: Blood Demon Art" onChange={e => setStyle(e.target.value)} />
+
             <div>
             <h2>Skills</h2>
               <div className="tags">
@@ -139,7 +149,7 @@ export function CreateOni() {
                 }
                 <NoteItem 
                   isNew 
-                  placeholder="Example: Blood Demon Art" 
+                  placeholder="Example: Compass Needle" 
                   onChange={e => setNewTag(e.target.value)}
                   value={newTag}
                   onClick={handleAddTag}
