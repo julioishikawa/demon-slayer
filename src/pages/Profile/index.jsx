@@ -47,8 +47,9 @@ export function Profile() {
   const navigate = useNavigate();
 
   function handleBack() {
-    navigate(-1);
+    navigate("/");
   }
+  
   return (
     <Container>
       <header>

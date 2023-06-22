@@ -22,35 +22,59 @@ export function CreateHashira() {
   const [style, setStyle] = useState("");
   const [goals, setGoals] = useState("");
 
-  const [tags, setTags] = useState([]);
-  const [newTag, setNewTag] = useState("");
+  const [skills, setSkills] = useState([]);
+  const [newSkill, setNewSkill] = useState("");
+  const [titles, setTitles] = useState([]);
+  const [newTitle, setNewTitle] = useState("");
 
   const isAgeValid = age >= 18 && age <= 40 || age === "?";
   const isHeightValid = height >= 1 && height <= 3 || height === "?";
   const isWeightValid = weight >= 40 && weight <= 595 || weight === "?";
-  const isTagValid = newTag.length >= 3 && newTag.length <= 20 || newTag === "?";
+  const isTitleValid = newTitle.length >= 3 && newTitle.length <= 20 || newTitle === "?";
+  const isSkillValid = newSkill.length >= 3 && newSkill.length <= 20 || newSkill === "?";
 
   const navigate = useNavigate();
 
-  function handleAddTag() {
-    if (!newTag) {
+  function handleAddSkill() {
+    if (!newSkill) {
       return alert("You need to put a value to add a ability.");
     }
 
-    if (!isTagValid) {
+    if (!isSkillValid) {
       return alert("Your skill must be between 3 and 20 letters.");
     }
 
-    setTags((prevState) => [
+    setSkills((prevState) => [
       ...prevState, 
-      newTag,
+      newSkill,
     ]);
 
-    setNewTag("");
+    setNewSkill("");
   }
 
-  function handleRemoveTag(tagDeleted) {
-    setTags(prevState => prevState.filter((tag) => tag !== tagDeleted));
+  function handleAddTitle() {
+    if (!newTitle) {
+      return alert("You need to put a value to add a ability.");
+    }
+
+    if (!isTitleValid) {
+      return alert("Your skill must be between 3 and 20 letters.");
+    }
+
+    setTitles((prevState) => [
+      ...prevState, 
+      newTitle,
+    ]);
+
+    setNewTitle("");
+  }
+
+  function handleRemoveSkill(skillDeleted) {
+    setSkills(prevState => prevState.filter((skill) => skill !== skillDeleted));
+  }
+
+  function handleRemoveTitle(titleDeleted) {
+    setTitles(prevState => prevState.filter((title) => title !== titleDeleted));
   }
 
   async function handleNewNote() {
@@ -70,13 +94,23 @@ export function CreateHashira() {
       return alert("Your weight must be between 40 and 595 kilograms.");
     }
 
-    if (tags.length === 0) {
+    if (skills.length === 0) {
       return alert("You need to create a ability for your character.");
     }
 
-    if (newTag) {
+    if (newSkill) {
       return alert(
         'You left one ability in the field to be add. Please click in the "+" button to add it or left the field empty.'
+      );
+    }
+
+    if (titles.length === 0) {
+      return alert("You need to create a title for your character.");
+    }
+
+    if (newTitle) {
+      return alert(
+        'You left one title in the field to be add. Please click in the "+" button to add it or left the field empty.'
       );
     }
 
@@ -89,7 +123,8 @@ export function CreateHashira() {
       weight,
       description,
       style,
-      tags,
+      skills,
+      titles,
       goals,
     });
 
@@ -130,8 +165,6 @@ export function CreateHashira() {
               <Input placeholder="Weight" onChange={e => setWeight(e.target.value)} />
             </div>
 
-            <Textarea placeholder="About" onChange={e => setDescription(e.target.value)} />
-
             <h2>Style</h2>
             <Input placeholder="Example: Flame's Breathing" onChange={e => setStyle(e.target.value)} />
 
@@ -139,25 +172,49 @@ export function CreateHashira() {
               <h2>Skills</h2>
               <div className="tags">
                 { 
-                  tags.map((tag, index) => (
+                  skills.map((tag, index) => (
                     <NoteItem 
                       key={String(index)}
                       value={tag}
-                      onClick={() => handleRemoveTag(tag)}
+                      onClick={() => handleRemoveSkill(tag)}
                     />
                   ))
                 }
                 <NoteItem 
                   isNew 
                   placeholder="Example: Dancing Flaming" 
-                  onChange={e => setNewTag(e.target.value)}
-                  value={newTag}
-                  onClick={handleAddTag}
+                  onChange={e => setNewSkill(e.target.value)}
+                  value={newSkill}
+                  onClick={handleAddSkill}
                 />
               </div>
             </div>
 
+            <Textarea placeholder="About" onChange={e => setDescription(e.target.value)} />
+
             <Textarea placeholder="Goals" clasName="goals" onChange={e => setGoals(e.target.value)} />
+
+            <div>
+              <h2>Title's</h2>
+              <div className="tags">
+                { 
+                  titles.map((tag, index) => (
+                    <NoteItem 
+                      key={String(index)}
+                      value={tag}
+                      onClick={() => handleRemoveTitle(tag)}
+                    />
+                  ))
+                }
+                <NoteItem 
+                  isNew 
+                  placeholder="Example: Hashira's Flame" 
+                  onChange={e => setNewTitle(e.target.value)}
+                  value={newTitle}
+                  onClick={handleAddTitle}
+                />
+              </div>
+            </div>
 
             <div className="buttons">
               <Button title="Create" onClick={handleNewNote} />

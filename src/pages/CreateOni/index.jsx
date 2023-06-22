@@ -22,31 +22,51 @@ export function CreateOni() {
   const [style, setStyle] = useState("");
   const [goals, setGoals] = useState("");
 
-  const [tags, setTags] = useState([]);
-  const [newTag, setNewTag] = useState("");
+  const [skills, setSkills] = useState([]);
+  const [newSkill, setNewSkill] = useState("");
+  const [titles, setTitles] = useState([]);
+  const [newTitle, setNewTitle] = useState("");
 
   const isAgeValid = age >= 4 && age <= 799 || age === "?";
   const isHeightValid = height >= 0.100 && height <= 50 || height === "?";
   const isWeightValid = weight >= 10 && weight <= 999 || weight === "?";
-  const isTagValid = newTag.length >= 3 && newTag.length <= 20 || newTag === "?";
+  const isTitleValid = newTitle.length >= 3 && newTitle.length <= 20 || newTitle === "?";
+  const isSkillValid = newSkill.length >= 3 && newSkill.length <= 20 || newSkill === "?";
 
   const navigate = useNavigate();
 
-  function handleAddTag() {
-    if (!newTag) {
+  function handleAddSkill() {
+    if (!newSkill) {
       return alert("You need to put a value to add a ability.");
     }
 
-    if (!isTagValid) {
+    if (!isSkillValid) {
       return alert("Your skill must be between 3 and 20 letters.");
     }
 
-    setTags((prevState) => [
+    setSkills((prevState) => [
       ...prevState, 
-      newTag
+      newSkill,
     ]);
 
-    setNewTag("");
+    setNewSkill("");
+  }
+
+  function handleAddTitle() {
+    if (!newTitle) {
+      return alert("You need to put a value to add a ability.");
+    }
+
+    if (!isTitleValid) {
+      return alert("Your skill must be between 3 and 20 letters.");
+    }
+
+    setTitles((prevState) => [
+      ...prevState, 
+      newTitle,
+    ]);
+
+    setNewTitle("");
   }
 
   function handleRemoveTag(tagDeleted) {
@@ -70,14 +90,24 @@ export function CreateOni() {
       return alert("Your weight must be between 10 and 999 kilograms.");
     }
 
-    if (newTag) {
+    if (skills.length === 0) {
+      return alert("You need to create a ability for your character.");
+    }
+
+    if (newSkill) {
       return alert(
         'You left one ability in the field to be add. Please click in the "+" button to add it or left the field empty.'
       );
     }
 
-    if (tags.length === 0) {
-      return alert("You need to create a ability for your character.");
+    if (titles.length === 0) {
+      return alert("You need to create a title for your character.");
+    }
+
+    if (newTitle) {
+      return alert(
+        'You left one title in the field to be add. Please click in the "+" button to add it or left the field empty.'
+      );
     }
 
     await api.post("/notes", {
@@ -89,7 +119,8 @@ export function CreateOni() {
       weight,
       description,
       style,
-      tags,
+      skills,
+      titles,
       goals,
     });
 
@@ -130,16 +161,14 @@ export function CreateOni() {
               <Input placeholder="Weight" onChange={e => setWeight(e.target.value)} />
             </div>
 
-            <Textarea placeholder="About" onChange={e => setDescription(e.target.value)} />
-
             <h2>Style</h2>
             <Input placeholder="Example: Blood Demon Art" onChange={e => setStyle(e.target.value)} />
 
             <div>
-            <h2>Skills</h2>
+              <h2>Skills</h2>
               <div className="tags">
                 { 
-                  tags.map((tag, index) => (
+                  skills.map((tag, index) => (
                     <NoteItem 
                       key={String(index)}
                       value={tag}
@@ -149,15 +178,39 @@ export function CreateOni() {
                 }
                 <NoteItem 
                   isNew 
-                  placeholder="Example: Compass Needle" 
-                  onChange={e => setNewTag(e.target.value)}
-                  value={newTag}
-                  onClick={handleAddTag}
+                  placeholder="Example: Dancing Flaming" 
+                  onChange={e => setNewSkill(e.target.value)}
+                  value={newSkill}
+                  onClick={handleAddSkill}
                 />
               </div>
             </div>
+            
+            <Textarea placeholder="About" onChange={e => setDescription(e.target.value)} />
 
             <Textarea placeholder="Goals" clasName="goals" onChange={e => setGoals(e.target.value)} />
+
+            <div>
+              <h2>Title's</h2>
+              <div className="tags">
+                { 
+                  titles.map((tag, index) => (
+                    <NoteItem 
+                      key={String(index)}
+                      value={tag}
+                      onClick={() => handleRemoveTag(tag)}
+                    />
+                  ))
+                }
+                <NoteItem 
+                  isNew 
+                  placeholder="Example: Hashira's Flame" 
+                  onChange={e => setNewTitle(e.target.value)}
+                  value={newTitle}
+                  onClick={handleAddTitle}
+                />
+              </div>
+            </div>
 
             <div className="buttons">
               <Button title="Create" onClick={handleNewNote} />

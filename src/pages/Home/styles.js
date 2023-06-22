@@ -105,8 +105,7 @@ export const NewChar = styled(Link)`
   font-weight: 500;
 
   background-color: ${({ theme }) => theme.COLORS.PINK};
-
-  color: ${({ theme }) => theme.COLORS.BACKGROUND_800};
+  color: ${({ theme }) => theme.COLORS.BLACK};
 `;
 
 export const Scrollbar = styled.div`

@@ -1,4 +1,4 @@
-import { Tag } from "../../components/Tag";
+import { TagTitle } from "../../components/TagTitle";
 
 import { Container } from "./styles";
 import img from "../../assets/oni.jpg";
@@ -14,7 +14,7 @@ export function OniNote({ title, description, ...rest }) {
         <p>{description}</p>
 
         <footer>
-          <Tag title="Upper Moon 3" />
+          <TagTitle title="Upper Moon 3" />
         </footer>
       </div>
     </Container>

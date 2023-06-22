@@ -40,7 +40,7 @@ export function Home() {
 
   useEffect(() => {
     async function fetchTags() {
-      const response = await api.get("/tags");
+      const response = await api.get("/titles");
       setTags(response.data);
     }
 
@@ -49,7 +49,7 @@ export function Home() {
 
   useEffect(() => {
     async function fetchNotes() {
-      const response = await api.get(`/notes?name=${search}&tags=${tagsSelected}`);
+      const response = await api.get(`/notes?name=${search}&titles=${tagsSelected}`);
       setNotes(response.data);
     }
 

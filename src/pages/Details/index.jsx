@@ -4,10 +4,11 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { api } from "../../services/api";
 
-import { Container, Wrapper, Content, Infos, Scrollbar } from "./styles";
+import { Container, Wrapper, Content, Infos, Delete, Scrollbar } from "./styles";
 
 import { Header } from "../../components/Header";
-import { Tag } from "../../components/Tag";
+import { TagSkill } from "../../components/TagSkill";
+import { TagTitle } from "../../components/TagTitle";
 
 export function Details() {
   const [data, setData] = useState(null);
@@ -18,6 +19,23 @@ export function Details() {
 
   function handleBack() {
     navigate(-1);
+  }
+
+  async function handleRemove() {
+    try {
+      const confirm = window.confirm('Are you sure you want to remove this character?');
+
+      if (confirm) {
+        await api.delete(`/notes/${params.id}`);
+        navigate("/");
+      }
+    } catch(e) {
+      if (e.response) {
+        alert(e.response.data.message);
+      } else {
+        alert("Could not do that.");
+      }
+    }
   }
 
   useEffect(() => {
@@ -33,53 +51,73 @@ export function Details() {
     <Container>
       <Header />
 
-      { data &&
-      <Scrollbar>
-        <Content>
-          <Wrapper>
-            <h1>{data.name}</h1>
-            <button type="button" onClick={handleBack}>
-              <FiArrowLeft />
-              Voltar
-            </button>
-          </Wrapper>
+      { 
+        data &&
+        <Scrollbar>
+          <Content>
+            <Wrapper>
+              <h1>{data.name}</h1>
+              <button type="button" onClick={handleBack}>
+                <FiArrowLeft />
+                Voltar
+              </button>
+            </Wrapper>
 
-         
-
-          <Infos>
-            <span>Age: {data.age}</span>
-            <span>Gender: {data.gender}</span>
-            <span>Form: {data.form}</span>
-            <span>Height: {data.height} cm</span>
-            <span>Weight: {data.weight} kg</span>
-            <span>Style: {data.style}</span>
-            
-            <h2>About</h2>
-            <p>
-              {data.description}
-            </p>
-
-            <h2>Goals</h2>
-            <p>
-              {data.goals}
-            </p>
-
-            <h2>Skills</h2>
-            {
-              data.tags &&
-              <div>
+            <Infos>
+              <span>Age: {data.age}</span>
+              <span>Gender: {data.gender}</span>
+              <span>Form: {data.form}</span>
+              <span>Height: {data.height} cm</span>
+              <span>Weight: {data.weight} kg</span>
+              <span>Style: {data.style}</span>
               {
-                data.tags.map(tag => (
-                <Tag 
-                  key={String(tag.id)}
-                  title={tag.title} />
-                ))
+                data.skills &&
+                <div>
+                  <span>Skills:
+                  {
+                    data.skills.map(tag => (
+                    <TagSkill
+                      key={String(tag.id)}
+                      name={tag.name} />
+                    ))
+                  }
+                  </span>
+                </div>
               }
-              </div>
-            }
-          </Infos>
-        </Content>
-      </Scrollbar>
+              
+              <h2>About</h2>
+              <p>
+                {data.description}
+              </p>
+
+              <h2>Goals</h2>
+              <p>
+                {data.goals}
+              </p>
+
+              <h2>Title's</h2>
+              {
+                data.titles &&
+                <div>
+                {
+                  data.titles.map(tag => (
+                  <TagTitle 
+                    key={String(tag.id)}
+                    title={tag.title} />
+                  ))
+                }
+                </div>
+              }
+
+              <Delete>
+                <button className="delete" type="button" onClick={handleRemove}>
+                  Remove character
+                </button>
+              </Delete>
+            </Infos>
+            
+          </Content>
+        </Scrollbar>
       }
     </Container>
   );

@@ -1,4 +1,4 @@
-import { Tag } from "../Tag";
+import { TagTitle } from "../TagTitle";
 
 import { Container } from "./styles";
 import img from "../../assets/hashira.jpg";
@@ -14,7 +14,7 @@ export function HashiraNote({ title, description, ...rest }) {
         <p>{description}</p>
 
         <footer>
-          <Tag title="Flame's Hashira" />
+          <TagTitle title="Flame's Hashira" />
         </footer>
       </div>
     </Container>

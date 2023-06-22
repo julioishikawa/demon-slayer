@@ -52,9 +52,32 @@ export const Infos = styled.div`
   }
 `;
 
+export const Delete = styled.div`
+  display: flex;
+  justify-content: center;
+
+  margin-top: 24px;
+
+  .delete {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px;
+
+    font-weight: 500;
+
+    background: none;
+    border: none;
+    border-radius: 8px;
+
+    background-color: ${({ theme }) => theme.COLORS.PINK};
+    color: ${({ theme }) => theme.COLORS.BLACK};
+    transition: all 0.3s;
+  }
+`;
+
 export const Scrollbar = styled.div`
-
-
   overflow-y: auto;
 
   ::-webkit-scrollbar {
