@@ -77,21 +77,6 @@ export const Content = styled.div`
   align-items: center;
   
   gap: 20px;
-
-  div {
-    width: 100%;
-    text-align: center;
-
-    h2 {
-      margin-bottom: 8px;
-    }
-
-    img {
-      width: 100%;
-      height: 50vh;
-      border-radius: 10px;
-    }
-  }
 `;
 
 export const NewChar = styled(Link)`

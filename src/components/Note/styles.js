@@ -5,11 +5,24 @@ export const Container = styled.button`
   max-height: 222px;
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
 
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
   border: none;
   border-radius: 16px;
 
+  
+  > img {
+      width: 30%;
+      height: 222px;
+      border-radius: 10px 0 0 10px;
+      object-fit: cover;
+    }
+`;
+
+export const Content = styled.div`
   padding: 32px;
-  margin-bottom: 24px;
 
   > h1 {
     text-align: left;
@@ -47,4 +60,4 @@ export const Container = styled.button`
     display: flex;
     margin-top: 24px;
   }
-`;
+`
