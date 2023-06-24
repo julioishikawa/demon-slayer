@@ -16,7 +16,7 @@ export const Content = styled.div`
   border-radius: 0 0 10px 10px;
 
   img {
-    width: 50%;
+    width: 20vw;
 
     border: 1px solid white;
   }

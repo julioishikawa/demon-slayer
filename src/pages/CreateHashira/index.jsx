@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useAuth } from "../../hooks/auth";
+
 import { api } from "../../services/api";
 
 import { Header } from "../../components/Header";
@@ -12,6 +14,8 @@ import { Button } from "../../components/Button";
 import { Container, Form, Scrollbar } from "./styles";
 
 export function CreateHashira() {
+  const { user } = useAuth();
+
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
@@ -21,6 +25,10 @@ export function CreateHashira() {
   const [description, setDescription] = useState("");
   const [style, setStyle] = useState("");
   const [goals, setGoals] = useState("");
+
+  const avatarURL = `${api.defaults.baseURL}/files/${user.avatar}`;
+  const [avatar, setAvatar] = useState(avatarURL);
+  const [avatarFile, setAvatarFile] = useState(null);
 
   const [skills, setSkills] = useState([]);
   const [newSkill, setNewSkill] = useState("");
@@ -34,6 +42,14 @@ export function CreateHashira() {
   const isSkillValid = newSkill.length >= 3 && newSkill.length <= 20 || newSkill === "?";
 
   const navigate = useNavigate();
+
+  function handleChangeAvatar(e) {
+    const file = e.target.files[0];
+    setAvatarFile(file);
+
+    const imagePreview = URL.createObjectURL(file);
+    setAvatar(imagePreview);
+  }
 
   function handleAddSkill() {
     if (!newSkill) {
@@ -114,7 +130,7 @@ export function CreateHashira() {
       );
     }
 
-    await api.post("/notes", {
+    const note = await api.post("/notes", {
       name,
       age,
       gender,
@@ -128,6 +144,11 @@ export function CreateHashira() {
       goals,
     });
 
+    const fileUploadForm = new FormData();
+    fileUploadForm.append("avatar", avatarFile);
+
+    await api.patch(`/notes/avatar/${note.data.id}`, fileUploadForm);
+    
     alert("Character added successfully!");
     navigate("/hashiras");
   }
@@ -215,6 +236,11 @@ export function CreateHashira() {
                 />
               </div>
             </div>
+
+
+          <label htmlFor="avatar">
+            <input type="file" onChange={handleChangeAvatar} />
+          </label>
 
             <div className="buttons">
               <Button title="Create" onClick={handleNewNote} />

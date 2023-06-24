@@ -7,11 +7,12 @@ import { api } from "../../services/api";
 import { Container, Wrapper, Content, Infos, Delete, Scrollbar } from "./styles";
 
 import { Header } from "../../components/Header";
-import { TagSkill } from "../../components/TagSkill";
 import { TagTitle } from "../../components/TagTitle";
 
 export function Details() {
   const [data, setData] = useState(null);
+
+  const [avatar, setAvatar] = useState(null);
 
   const params = useParams();
 
@@ -27,7 +28,7 @@ export function Details() {
 
       if (confirm) {
         await api.delete(`/notes/${params.id}`);
-        navigate("/");
+        navigate(-1);
       }
     } catch(e) {
       if (e.response) {
@@ -41,6 +42,9 @@ export function Details() {
   useEffect(() => {
     async function fetchNote() {
       const response = await api.get(`/notes/${params.id}`);
+      const charImage = `${api.defaults.baseURL}/files/${response.data.avatar}`
+      
+      setAvatar(charImage);
       setData(response.data);
     }
 
@@ -62,7 +66,9 @@ export function Details() {
                 Voltar
               </button>
             </Wrapper>
-
+            
+            <img src={avatar} alt="Character image" />
+            
             <Infos>
               <span>Age: {data.age}</span>
               <span>Gender: {data.gender}</span>
@@ -73,14 +79,10 @@ export function Details() {
               {
                 data.skills &&
                 <div>
-                  <span>Skills:
-                  {
-                    data.skills.map(tag => (
-                    <TagSkill
-                      key={String(tag.id)}
-                      name={tag.name} />
-                    ))
-                  }
+                  <span>Skills: 
+                    { 
+                      data.skills.map((item) => item.name).join(", ")
+                    }
                   </span>
                 </div>
               }
