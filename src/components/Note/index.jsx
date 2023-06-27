@@ -1,16 +1,15 @@
-import { api } from '../../services/api';
+import { api } from "../../services/api";
 
-import { Container, Content } from './styles'
-import { TagTitle } from '../TagTitle'
+import { Container, Content } from "./styles";
+import { TagTitle } from "../TagTitle";
 
 export function Note({ data, ...rest }) {
-  const charImage = `${api.defaults.baseURL}/files/${data.avatar}`
-  
+  const charImage = `${api.defaults.baseURL}/files/${data.avatar}`;
+
   return (
     <Container {...rest}>
-    
-      <img src={charImage} alt="" />
-      
+      <img src={charImage} alt="Character image" />
+
       <Content>
         <h1>{data.name}</h1>
 
@@ -19,11 +18,11 @@ export function Note({ data, ...rest }) {
         {data.titles && (
           <footer>
             {data.titles.map((tag) => {
-              return <TagTitle key={tag.id} title={tag.title} />
+              return <TagTitle key={tag.id} title={tag.title} />;
             })}
           </footer>
         )}
       </Content>
     </Container>
-  )
+  );
 }

@@ -5,7 +5,6 @@ import { Container, Content, Wrapper } from "./styles";
 
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
-import { OniNote } from "../../components/OniNote";
 
 export function Onis() {
   const navigate = useNavigate();
@@ -34,11 +33,7 @@ export function Onis() {
       </Wrapper>
 
       <Content>
-        <OniNote
-          title="Akaza"
-          description="dwqkdopwkodp"
-          onClick={handleDetails}
-        />
+        
       </Content>
     </Container>
   );

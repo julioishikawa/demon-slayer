@@ -18,7 +18,11 @@ export const Container = styled.header`
   border-bottom-color: ${({ theme }) => theme.COLORS.PINK};
 `;
 
-export const Logo = styled.div`
+export const Logo = styled(Link)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   img {
     width: 70px;
     height: 70px;
@@ -28,7 +32,7 @@ export const Logo = styled.div`
 export const Search = styled.div`
   display: flex;
   align-items: center;
-  padding: 0 64px;
+
   flex-grow: 1;
 `;
 
