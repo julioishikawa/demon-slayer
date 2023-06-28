@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FiSearch, FiChevronDown, FiX, FiMenu } from "react-icons/fi";
+import { FiSearch, FiChevronDown } from "react-icons/fi";
 
 import { api } from "../../services/api";
 
@@ -11,7 +11,7 @@ import { ButtonText } from "../../components/ButtonText";
 import { Dropdown } from "../../components/Menu/Dropdown";
 
 import {
-  Navbar,
+  Rankings,
   Container,
   List,
   Wrapper,
@@ -26,26 +26,14 @@ export function Home() {
   const [search, setSearch] = useState("");
   const [notes, setNotes] = useState([]);
 
-  const [click, setClick] = useState(false);
   const [dropdown, setDropdown] = useState(false);
 
-  const handleClick = () => setClick(!click);
-  const closeMobileMenu = () => setClick(false);
-
   const onMouseEnter = () => {
-    if (window.innerWidth < 960) {
-      setDropdown(false);
-    } else {
-      setDropdown(true);
-    }
+    setDropdown(true);
   };
 
   const onMouseLeave = () => {
-    if (window.innerWidth < 960) {
-      setDropdown(false);
-    } else {
-      setDropdown(false);
-    }
+    setDropdown(false);
   };
 
   const navigate = useNavigate();
@@ -91,18 +79,14 @@ export function Home() {
 
   return (
     <Container>
-      <Navbar>
-        <div className="menu-icon" onClick={handleClick}>
-          {click ? <FiX /> : <FiMenu />}
-        </div>
-
-        <ul className={click ? "nav-menu active" : "nav-menu"}>
+      <Rankings>
+        <ul>
           <li
             className="nav-item"
             onMouseEnter={onMouseEnter}
             onMouseLeave={onMouseLeave}
           >
-            <h3 className="nav-links" onClick={closeMobileMenu}>
+            <h3 className="nav-links">
               Rankings
               <FiChevronDown />
             </h3>
@@ -110,7 +94,7 @@ export function Home() {
             {dropdown && <Dropdown />}
           </li>
         </ul>
-      </Navbar>
+      </Rankings>
 
       <Header>
         <Input

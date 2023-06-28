@@ -10,7 +10,7 @@ import { Note } from "../../components/Note";
 
 import { Container, Content, Wrapper } from "./styles";
 
-export function Hashiras() {
+export function Characters() {
   const [search, setSearch] = useState("");
   const [notes, setNotes] = useState([]);
 
@@ -47,7 +47,7 @@ export function Hashiras() {
 
       <Content>
         <Wrapper>
-          <h1>Hashira's Ranking</h1>
+          <h1>Character's Ranking</h1>
 
           <button type="button" onClick={handleBack}>
             <FiArrowLeft />

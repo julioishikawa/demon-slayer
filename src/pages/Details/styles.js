@@ -16,9 +16,11 @@ export const Content = styled.div`
   border-radius: 0 0 10px 10px;
 
   img {
-    width: 20vw;
-
+    width: 50%;
+    height: 440px;
     border: 1px solid white;
+
+    object-fit: cover;
   }
 `;
 
@@ -80,11 +82,14 @@ export const Delete = styled.div`
 export const Scrollbar = styled.div`
   overflow-y: auto;
 
+  margin: 2px 4px;
+
   ::-webkit-scrollbar {
     width: 8px;
   }
 
   ::-webkit-scrollbar-thumb {
     background-color: ${({ theme }) => theme.COLORS.PINK};
+    border-radius: 8px;
   }
 `;

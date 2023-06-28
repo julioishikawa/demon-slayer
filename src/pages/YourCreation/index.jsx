@@ -10,11 +10,11 @@ import { Note } from "../../components/Note";
 
 import { Container, Content, Wrapper } from "./styles";
 
-export function Hashiras() {
+export function YourCreation() {
   const [search, setSearch] = useState("");
   const [notes, setNotes] = useState([]);
 
-  const notesFiltered = notes.filter((note) => note.id <= 10);
+  const notesFiltered = notes.filter((note) => note.id >= 20);
 
   const navigate = useNavigate();
 
@@ -47,7 +47,7 @@ export function Hashiras() {
 
       <Content>
         <Wrapper>
-          <h1>Hashira's Ranking</h1>
+          <h1>Your Character's Ranking</h1>
 
           <button type="button" onClick={handleBack}>
             <FiArrowLeft />

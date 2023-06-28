@@ -1,5 +1,10 @@
 export const MenuItems = [
   {
+    title: "Characters",
+    path: "/characters",
+    cName: "dropdown-link",
+  },
+  {
     title: "Hashira's",
     path: "/hashiras",
     cName: "dropdown-link",
@@ -12,7 +17,7 @@ export const MenuItems = [
   },
   {
     title: "Your's creation",
-    path: "/yourscreation",
+    path: "/yourcharacters",
     cName: "dropdown-link",
   },
 ];

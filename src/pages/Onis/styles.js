@@ -11,10 +11,10 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  padding: 40px 144px;
-
   display: flex;
   justify-content: space-between;
+
+  padding-bottom: 20px;
 
   button {
     display: flex;
@@ -31,10 +31,24 @@ export const Wrapper = styled.div`
 `;
 
 export const Content = styled.div`
-  padding: 0 144px;
+  padding: 40px 144px;
 
   display: flex;
   flex-direction: column;
+  gap: 20px;
+
+  overflow-y: auto;
+
+  margin: 2px 4px;
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.COLORS.PINK};
+    border-radius: 8px;
+  }
 `;
 
 export const Footer = styled.footer`

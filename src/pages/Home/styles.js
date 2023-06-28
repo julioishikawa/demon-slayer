@@ -16,7 +16,7 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND_800};
 `;
 
-export const Navbar = styled.nav`
+export const Rankings = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,82 +57,6 @@ export const Navbar = styled.nav`
     filter: brightness(0.9);
     transition: filter 0.3s;
   }
-
-  .nav-links-mobile {
-    display: none;
-  }
-
-  .menu-icon {
-    display: none;
-  }
-
-  @media screen and (max-width: 960px) {
-    .NavbarItems {
-      position: relative;
-    }
-
-    .nav-menu {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      height: 90vh;
-      position: absolute;
-      top: 80px;
-      left: -100%;
-      opacity: 1;
-      transition: all 0.5s ease;
-    }
-
-    .nav-menu.active {
-      background: #242222;
-      left: 0;
-      opacity: 1;
-      transition: all 0.5s ease;
-      z-index: 1;
-    }
-
-    .nav-links {
-      text-align: center;
-      padding: 2rem;
-      width: 100%;
-      display: table;
-    }
-
-    .nav-links:hover {
-      background-color: #1888ff;
-      border-radius: 0;
-    }
-
-    .menu-icon {
-      display: block;
-      position: absolute;
-      font-size: 1.8rem;
-      cursor: pointer;
-    }
-
-    .nav-links-mobile {
-      display: block;
-      text-align: center;
-      padding: 1.5rem;
-      margin: 2rem auto;
-      border-radius: 4px;
-      width: 80%;
-      background: #1888ff;
-      text-decoration: none;
-      color: #fff;
-      font-size: 1.5rem;
-    }
-
-    .nav-links-mobile:hover {
-      background: #fff;
-      color: #1888ff;
-      transition: 250ms;
-    }
-
-    button {
-      display: none;
-    }
-  }
 `;
 
 export const List = styled.ul`
@@ -149,6 +73,8 @@ export const List = styled.ul`
   }
 
   overflow-y: auto;
+
+  margin: 2px 0;
 
   ::-webkit-scrollbar {
     width: 8px;
@@ -196,11 +122,14 @@ export const NewChar = styled(Link)`
 export const Scrollbar = styled.div`
   overflow-y: auto;
 
+  margin: 2px 4px;
+
   ::-webkit-scrollbar {
     width: 8px;
   }
 
   ::-webkit-scrollbar-thumb {
     background-color: ${({ theme }) => theme.COLORS.PINK};
+    border-radius: 8px;
   }
 `;
