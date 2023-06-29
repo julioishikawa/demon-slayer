@@ -38,6 +38,10 @@ export function Home() {
 
   const navigate = useNavigate();
 
+  function handleDetails(id) {
+    navigate(`/details/${id}`);
+  }
+
   function handleTagSelected(tagName) {
     if (tagName === "all") {
       return setTagsSelected([]);
@@ -51,10 +55,6 @@ export function Home() {
     } else {
       setTagsSelected((prevState) => [...prevState, tagName]);
     }
-  }
-
-  function handleDetails(id) {
-    navigate(`/details/${id}`);
   }
 
   useEffect(() => {
@@ -71,6 +71,7 @@ export function Home() {
       const response = await api.get(
         `/notes?name=${search}&titles=${tagsSelected}`
       );
+
       setNotes(response.data);
     }
 

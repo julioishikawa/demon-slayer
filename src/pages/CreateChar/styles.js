@@ -7,22 +7,19 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
 
-  padding: 40px 0;
-
-  background: ${({ theme }) => theme.COLORS.BACKGROUND_500};
+  background: ${({ theme }) => theme.COLORS.BACKGROUND_900};
 
   > header {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    padding: 0 120px;
 
-    > h1 {
-      text-align: center;
+    text-align: center;
+    font-size: 30px;
+
+    h1 {
+      padding: 50px 0px;
     }
 
     > button {
-      margin-left: 100px;
-
       display: flex;
       align-items: center;
       gap: 8px;
@@ -36,13 +33,23 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 70px;
+
+  padding: 40px 100px;
+
+  a {
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+  }
 
   > div {
+    width: 100%;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -51,9 +58,14 @@ export const Content = styled.div`
   }
 
   img {
-    width: 45vw;
-    height: 70vh;
+    width: 100%;
+    border: 1px solid white;
 
     border-radius: 10px;
+    transition: transform 300ms;
+  }
+
+  img:hover {
+    transform: scale(1.05);
   }
 `;

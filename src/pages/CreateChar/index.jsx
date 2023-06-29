@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 
-import { Container, Content } from "./styles";
 import hashiras from "../../assets/hashiras-bg.jpg";
 import onis from "../../assets/upper-moons.png";
+import { Container, Content } from "./styles";
 
 export function CreateChar() {
   const navigate = useNavigate();
@@ -16,28 +16,25 @@ export function CreateChar() {
     <Container>
       <header>
         <h1>CHOOSE YOUR WAY</h1>
- 
+
         <button type="button" onClick={handleBack}>
           <FiArrowLeft />
           Voltar
         </button>
       </header>
-        
-      
+
       <Content>
         <div>
           <h2>GOOD</h2>
           <Link to="/createhashira">
-            <img src={hashiras} alt="hashira's picture" />
+            <img src={hashiras} alt="good way photo" />
           </Link>
         </div>
-
-        <h2>or</h2>
 
         <div>
           <h2>EVIL</h2>
           <Link to="/createoni">
-            <img src={onis} alt="oni's picture" />
+            <img src={onis} alt="bad way photo" />
           </Link>
         </div>
       </Content>

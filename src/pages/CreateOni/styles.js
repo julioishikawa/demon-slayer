@@ -76,6 +76,36 @@ export const Form = styled.form`
   }
 `;
 
+export const CharImage = styled.div`
+  input {
+    display: none;
+  }
+
+  label {
+    padding: 20px;
+    margin-bottom: 20px;
+
+    width: 200px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    font-weight: 500;
+
+    color: ${({ theme }) => theme.COLORS.BLACK};
+    background-color: ${({ theme }) => theme.COLORS.PINK};
+    border-radius: 8px;
+
+    cursor: pointer;
+  }
+
+  img {
+    width: 20%;
+  }
+`;
+
 export const Scrollbar = styled.div`
   margin: 2px 5px 0 0;
 

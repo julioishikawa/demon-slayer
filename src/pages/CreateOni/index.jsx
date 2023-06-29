@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useAuth } from "../../hooks/auth";
-
 import { api } from "../../services/api";
 
 import { Header } from "../../components/Header";
@@ -11,11 +9,9 @@ import { Textarea } from "../../components/Textarea";
 import { NoteItem } from "../../components/NoteItem";
 import { Button } from "../../components/Button";
 
-import { Container, Form, Scrollbar } from "./styles";
+import { Container, Form, CharImage, Scrollbar } from "./styles";
 
 export function CreateOni() {
-  const { user } = useAuth();
-
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
@@ -26,7 +22,7 @@ export function CreateOni() {
   const [style, setStyle] = useState("");
   const [goals, setGoals] = useState("");
 
-  const avatarURL = `${api.defaults.baseURL}/files/${user.avatar}`;
+  const avatarURL = `${api.defaults.baseURL}/files/${null}`;
   const [avatar, setAvatar] = useState(avatarURL);
   const [avatarFile, setAvatarFile] = useState(null);
 
@@ -35,13 +31,25 @@ export function CreateOni() {
   const [titles, setTitles] = useState([]);
   const [newTitle, setNewTitle] = useState("");
 
-  const isAgeValid = age >= 4 && age <= 799 || age === "?";
-  const isHeightValid = height >= 0.100 && height <= 50 || height === "?";
-  const isWeightValid = weight >= 10 && weight <= 999 || weight === "?";
-  const isTitleValid = newTitle.length >= 3 && newTitle.length <= 20 || newTitle === "?";
-  const isSkillValid = newSkill.length >= 3 && newSkill.length <= 20 || newSkill === "?";
+  const isAgeValid = (age >= 4 && age <= 799) || age === "?";
+  const isHeightValid = (height >= 0.1 && height <= 50) || height === "?";
+  const isWeightValid = (weight >= 10 && weight <= 999) || weight === "?";
+  const isTitleValid =
+    (newTitle.length >= 3 && newTitle.length <= 20) || newTitle === "?";
+  const isSkillValid =
+    (newSkill.length >= 3 && newSkill.length <= 20) || newSkill === "?";
 
   const navigate = useNavigate();
+
+  function handlePreviewImage() {
+    const uploadButton = document.getElementById("avatar");
+
+    const image = document.querySelector(".image");
+
+    uploadButton.addEventListener("change", () => {
+      image.classList.remove("hide");
+    });
+  }
 
   function handleChangeAvatar(e) {
     const file = e.target.files[0];
@@ -60,10 +68,7 @@ export function CreateOni() {
       return alert("Your skill must be between 3 and 20 letters.");
     }
 
-    setSkills((prevState) => [
-      ...prevState, 
-      newSkill,
-    ]);
+    setSkills((prevState) => [...prevState, newSkill]);
 
     setNewSkill("");
   }
@@ -77,20 +82,27 @@ export function CreateOni() {
       return alert("Your skill must be between 3 and 20 letters.");
     }
 
-    setTitles((prevState) => [
-      ...prevState, 
-      newTitle,
-    ]);
+    setTitles((prevState) => [...prevState, newTitle]);
 
     setNewTitle("");
   }
 
   function handleRemoveTag(tagDeleted) {
-    setTags(prevState => prevState.filter((tag) => tag.id !== tagDeleted.id));
+    setTags((prevState) => prevState.filter((tag) => tag.id !== tagDeleted.id));
   }
 
   async function handleNewNote() {
-    if (!name || !age || !gender || !form || !height || !weight  || !description || !style || !goals) {
+    if (
+      !name ||
+      !age ||
+      !gender ||
+      !form ||
+      !height ||
+      !weight ||
+      !description ||
+      !style ||
+      !goals
+    ) {
       return alert("Please fill in all fields to complete your character.");
     }
 
@@ -99,10 +111,12 @@ export function CreateOni() {
     }
 
     if (!isHeightValid) {
-      return alert("Your height must be between 0.100 milimeters and 50 meters.");
+      return alert(
+        "Your height must be between 0.100 milimeters and 50 meters."
+      );
     }
 
-    if(!isWeightValid) {
+    if (!isWeightValid) {
       return alert("Your weight must be between 10 and 999 kilograms.");
     }
 
@@ -158,7 +172,7 @@ export function CreateOni() {
       navigate(-1);
     }
   }
-  
+
   return (
     <Container>
       <Header />
@@ -171,71 +185,104 @@ export function CreateOni() {
             </header>
 
             <div className="infos">
-              <Input placeholder="Name" onChange={e => setName(e.target.value)} />
-              <Input placeholder="Age" onChange={e => setAge(e.target.value)} />
-              <Input placeholder="Gender" onChange={e => setGender(e.target.value)} />
+              <Input
+                placeholder="Name"
+                onChange={(e) => setName(e.target.value)}
+              />
+              <Input
+                placeholder="Age"
+                onChange={(e) => setAge(e.target.value)}
+              />
+              <Input
+                placeholder="Gender"
+                onChange={(e) => setGender(e.target.value)}
+              />
             </div>
 
             <div className="infos">
-              <Input placeholder="Form" onChange={e => setForm(e.target.value)} />
-              <Input placeholder="Height" onChange={e => setHeight(e.target.value)} />
-              <Input placeholder="Weight" onChange={e => setWeight(e.target.value)} />
+              <Input
+                placeholder="Form"
+                onChange={(e) => setForm(e.target.value)}
+              />
+              <Input
+                placeholder="Height"
+                onChange={(e) => setHeight(e.target.value)}
+              />
+              <Input
+                placeholder="Weight"
+                onChange={(e) => setWeight(e.target.value)}
+              />
             </div>
 
             <h2>Style</h2>
-            <Input placeholder="Example: Blood Demon Art" onChange={e => setStyle(e.target.value)} />
+            <Input
+              placeholder="Example: Blood Demon Art"
+              onChange={(e) => setStyle(e.target.value)}
+            />
 
             <div>
               <h2>Skills</h2>
               <div className="tags">
-                { 
-                  skills.map((tag, index) => (
-                    <NoteItem 
-                      key={String(index)}
-                      value={tag}
-                      onClick={() => handleRemoveTag(tag)}
-                    />
-                  ))
-                }
-                <NoteItem 
-                  isNew 
-                  placeholder="Example: Dancing Flaming" 
-                  onChange={e => setNewSkill(e.target.value)}
+                {skills.map((tag, index) => (
+                  <NoteItem
+                    key={String(index)}
+                    value={tag}
+                    onClick={() => handleRemoveTag(tag)}
+                  />
+                ))}
+                <NoteItem
+                  isNew
+                  placeholder="Example: Dancing Flaming"
+                  onChange={(e) => setNewSkill(e.target.value)}
                   value={newSkill}
                   onClick={handleAddSkill}
                 />
               </div>
             </div>
-            
-            <Textarea placeholder="About" onChange={e => setDescription(e.target.value)} />
 
-            <Textarea placeholder="Goals" clasName="goals" onChange={e => setGoals(e.target.value)} />
+            <Textarea
+              placeholder="About"
+              onChange={(e) => setDescription(e.target.value)}
+            />
+
+            <Textarea
+              placeholder="Goals"
+              clasName="goals"
+              onChange={(e) => setGoals(e.target.value)}
+            />
 
             <div>
               <h2>Title's</h2>
               <div className="tags">
-                { 
-                  titles.map((tag, index) => (
-                    <NoteItem 
-                      key={String(index)}
-                      value={tag}
-                      onClick={() => handleRemoveTag(tag)}
-                    />
-                  ))
-                }
-                <NoteItem 
-                  isNew 
-                  placeholder="Example: Hashira's Flame" 
-                  onChange={e => setNewTitle(e.target.value)}
+                {titles.map((tag, index) => (
+                  <NoteItem
+                    key={String(index)}
+                    value={tag}
+                    onClick={() => handleRemoveTag(tag)}
+                  />
+                ))}
+                <NoteItem
+                  isNew
+                  placeholder="Example: Hashira's Flame"
+                  onChange={(e) => setNewTitle(e.target.value)}
                   value={newTitle}
                   onClick={handleAddTitle}
                 />
               </div>
             </div>
 
-            <label htmlFor="avatar">
-              <input type="file" onChange={handleChangeAvatar} />
-            </label>
+            <CharImage>
+              <label htmlFor="avatar">
+                <input
+                  type="file"
+                  id="avatar"
+                  onClick={handlePreviewImage}
+                  onChange={handleChangeAvatar}
+                />
+                Upload Image
+              </label>
+              <img className="image hide" src={avatar} alt="Character Image" />
+            </CharImage>
 
             <div className="buttons">
               <Button title="Create" onClick={handleNewNote} />

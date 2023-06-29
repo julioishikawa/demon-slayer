@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useAuth } from "../../hooks/auth";
-
 import { api } from "../../services/api";
 
 import { Header } from "../../components/Header";
@@ -11,11 +9,9 @@ import { Textarea } from "../../components/Textarea";
 import { NoteItem } from "../../components/NoteItem";
 import { Button } from "../../components/Button";
 
-import { Container, Form, Scrollbar } from "./styles";
+import { Container, Form, CharImage, Scrollbar } from "./styles";
 
 export function CreateHashira() {
-  const { user } = useAuth();
-
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
@@ -26,7 +22,7 @@ export function CreateHashira() {
   const [style, setStyle] = useState("");
   const [goals, setGoals] = useState("");
 
-  const avatarURL = `${api.defaults.baseURL}/files/${user.avatar}`;
+  const avatarURL = `${api.defaults.baseURL}/files/${null}`;
   const [avatar, setAvatar] = useState(avatarURL);
   const [avatarFile, setAvatarFile] = useState(null);
 
@@ -35,13 +31,25 @@ export function CreateHashira() {
   const [titles, setTitles] = useState([]);
   const [newTitle, setNewTitle] = useState("");
 
-  const isAgeValid = age >= 18 && age <= 40 || age === "?";
-  const isHeightValid = height >= 1 && height <= 3 || height === "?";
-  const isWeightValid = weight >= 40 && weight <= 595 || weight === "?";
-  const isTitleValid = newTitle.length >= 3 && newTitle.length <= 20 || newTitle === "?";
-  const isSkillValid = newSkill.length >= 3 && newSkill.length <= 20 || newSkill === "?";
+  const isAgeValid = (age >= 18 && age <= 40) || age === "?";
+  const isHeightValid = (height >= 1 && height <= 3) || height === "?";
+  const isWeightValid = (weight >= 40 && weight <= 595) || weight === "?";
+  const isTitleValid =
+    (newTitle.length >= 3 && newTitle.length <= 20) || newTitle === "?";
+  const isSkillValid =
+    (newSkill.length >= 3 && newSkill.length <= 20) || newSkill === "?";
 
   const navigate = useNavigate();
+
+  function handlePreviewImage() {
+    const uploadButton = document.getElementById("avatar");
+
+    const image = document.querySelector(".image");
+
+    uploadButton.addEventListener("change", () => {
+      image.classList.remove("hide");
+    });
+  }
 
   function handleChangeAvatar(e) {
     const file = e.target.files[0];
@@ -60,10 +68,7 @@ export function CreateHashira() {
       return alert("Your skill must be between 3 and 20 letters.");
     }
 
-    setSkills((prevState) => [
-      ...prevState, 
-      newSkill,
-    ]);
+    setSkills((prevState) => [...prevState, newSkill]);
 
     setNewSkill("");
   }
@@ -77,36 +82,49 @@ export function CreateHashira() {
       return alert("Your skill must be between 3 and 20 letters.");
     }
 
-    setTitles((prevState) => [
-      ...prevState, 
-      newTitle,
-    ]);
+    setTitles((prevState) => [...prevState, newTitle]);
 
     setNewTitle("");
   }
 
   function handleRemoveSkill(skillDeleted) {
-    setSkills(prevState => prevState.filter((skill) => skill !== skillDeleted));
+    setSkills((prevState) =>
+      prevState.filter((skill) => skill !== skillDeleted)
+    );
   }
 
   function handleRemoveTitle(titleDeleted) {
-    setTitles(prevState => prevState.filter((title) => title !== titleDeleted));
+    setTitles((prevState) =>
+      prevState.filter((title) => title !== titleDeleted)
+    );
   }
 
   async function handleNewNote() {
-    if (!name || !age || !gender || !form || !height || !weight  || !description || !style || !goals) {
+    if (
+      !name ||
+      !age ||
+      !gender ||
+      !form ||
+      !height ||
+      !weight ||
+      !description ||
+      !style ||
+      !goals
+    ) {
       return alert("Please fill in all fields to complete your character.");
     }
 
     if (!isAgeValid) {
-      return alert("Your minimum age must be 18 and maximum age must be 40 years old.");
+      return alert(
+        "Your minimum age must be 18 and maximum age must be 40 years old."
+      );
     }
 
     if (!isHeightValid) {
       return alert("Your height must be between 1 and 3 meters.");
     }
 
-    if(!isWeightValid) {
+    if (!isWeightValid) {
       return alert("Your weight must be between 40 and 595 kilograms.");
     }
 
@@ -148,7 +166,7 @@ export function CreateHashira() {
     fileUploadForm.append("avatar", avatarFile);
 
     await api.patch(`/notes/avatar/${note.data.id}`, fileUploadForm);
-    
+
     alert("Character added successfully!");
     navigate("/hashiras");
   }
@@ -162,7 +180,7 @@ export function CreateHashira() {
       navigate(-1);
     }
   }
-  
+
   return (
     <Container>
       <Header />
@@ -175,72 +193,104 @@ export function CreateHashira() {
             </header>
 
             <div className="infos">
-              <Input placeholder="Name" onChange={e => setName(e.target.value)} />
-              <Input placeholder="Age" onChange={e => Number(setAge(e.target.value))} />
-              <Input placeholder="Gender" onChange={e => setGender(e.target.value)} />
+              <Input
+                placeholder="Name"
+                onChange={(e) => setName(e.target.value)}
+              />
+              <Input
+                placeholder="Age"
+                onChange={(e) => Number(setAge(e.target.value))}
+              />
+              <Input
+                placeholder="Gender"
+                onChange={(e) => setGender(e.target.value)}
+              />
             </div>
 
             <div className="infos">
-              <Input placeholder="Form" onChange={e => setForm(e.target.value)} />
-              <Input placeholder="Height" onChange={e => setHeight(e.target.value)} />
-              <Input placeholder="Weight" onChange={e => setWeight(e.target.value)} />
+              <Input
+                placeholder="Form"
+                onChange={(e) => setForm(e.target.value)}
+              />
+              <Input
+                placeholder="Height"
+                onChange={(e) => setHeight(e.target.value)}
+              />
+              <Input
+                placeholder="Weight"
+                onChange={(e) => setWeight(e.target.value)}
+              />
             </div>
 
             <h2>Style</h2>
-            <Input placeholder="Example: Flame's Breathing" onChange={e => setStyle(e.target.value)} />
+            <Input
+              placeholder="Example: Flame's Breathing"
+              onChange={(e) => setStyle(e.target.value)}
+            />
 
             <div>
               <h2>Skills</h2>
               <div className="tags">
-                { 
-                  skills.map((tag, index) => (
-                    <NoteItem 
-                      key={String(index)}
-                      value={tag}
-                      onClick={() => handleRemoveSkill(tag)}
-                    />
-                  ))
-                }
-                <NoteItem 
-                  isNew 
-                  placeholder="Example: Dancing Flaming" 
-                  onChange={e => setNewSkill(e.target.value)}
+                {skills.map((tag, index) => (
+                  <NoteItem
+                    key={String(index)}
+                    value={tag}
+                    onClick={() => handleRemoveSkill(tag)}
+                  />
+                ))}
+                <NoteItem
+                  isNew
+                  placeholder="Example: Dancing Flaming"
+                  onChange={(e) => setNewSkill(e.target.value)}
                   value={newSkill}
                   onClick={handleAddSkill}
                 />
               </div>
             </div>
 
-            <Textarea placeholder="About" onChange={e => setDescription(e.target.value)} />
+            <Textarea
+              placeholder="About"
+              onChange={(e) => setDescription(e.target.value)}
+            />
 
-            <Textarea placeholder="Goals" clasName="goals" onChange={e => setGoals(e.target.value)} />
+            <Textarea
+              placeholder="Goals"
+              clasName="goals"
+              onChange={(e) => setGoals(e.target.value)}
+            />
 
             <div>
               <h2>Title's</h2>
               <div className="tags">
-                { 
-                  titles.map((tag, index) => (
-                    <NoteItem 
-                      key={String(index)}
-                      value={tag}
-                      onClick={() => handleRemoveTitle(tag)}
-                    />
-                  ))
-                }
-                <NoteItem 
-                  isNew 
-                  placeholder="Example: Hashira's Flame" 
-                  onChange={e => setNewTitle(e.target.value)}
+                {titles.map((tag, index) => (
+                  <NoteItem
+                    key={String(index)}
+                    value={tag}
+                    onClick={() => handleRemoveTitle(tag)}
+                  />
+                ))}
+                <NoteItem
+                  isNew
+                  placeholder="Example: Hashira's Flame"
+                  onChange={(e) => setNewTitle(e.target.value)}
                   value={newTitle}
                   onClick={handleAddTitle}
                 />
               </div>
             </div>
 
-
-          <label htmlFor="avatar">
-            <input type="file" onChange={handleChangeAvatar} />
-          </label>
+            <CharImage>
+              <label htmlFor="avatar">
+                <input
+                  type="file"
+                  id="avatar"
+                  onClick={handlePreviewImage}
+                  onChange={handleChangeAvatar}
+                />
+                Upload Image
+              </label>
+              <img className="image hide" src={avatar} alt="Character Image" />
+            </CharImage>
 
             <div className="buttons">
               <Button title="Create" onClick={handleNewNote} />
