@@ -8,13 +8,16 @@ import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { Note } from "../../components/Note";
 
-import { Container, Content, Wrapper } from "./styles";
+import { Container, Wrapper, Content, Scrollbar } from "./styles";
 
 export function Hashiras() {
   const [search, setSearch] = useState("");
   const [notes, setNotes] = useState([]);
 
-  const notesFiltered = notes.filter((note) => note.id <= 10);
+  const notesFiltered = notes.filter((note) => note.id <= 8);
+  const notesFormerFiltered = notes.filter(
+    (note) => note.id > 8 && note.id <= 14
+  );
 
   const navigate = useNavigate();
 
@@ -45,9 +48,9 @@ export function Hashiras() {
         />
       </Header>
 
-      <Content>
+      <Scrollbar>
         <Wrapper>
-          <h1>Hashira's Ranking</h1>
+          <h1>Hashira's</h1>
 
           <button type="button" onClick={handleBack}>
             <FiArrowLeft />
@@ -55,14 +58,27 @@ export function Hashiras() {
           </button>
         </Wrapper>
 
-        {notesFiltered.map((note) => (
-          <Note
-            key={String(note.id)}
-            data={note}
-            onClick={() => handleDetails(note.id)}
-          />
-        ))}
-      </Content>
+        <Content>
+          {notesFiltered.map((note) => (
+            <Note
+              key={String(note.id)}
+              data={note}
+              onClick={() => handleDetails(note.id)}
+            />
+          ))}
+        </Content>
+
+        <Content>
+          <h1>Former Hashira's</h1>
+          {notesFormerFiltered.map((note) => (
+            <Note
+              key={String(note.id)}
+              data={note}
+              onClick={() => handleDetails(note.id)}
+            />
+          ))}
+        </Content>
+      </Scrollbar>
     </Container>
   );
 }

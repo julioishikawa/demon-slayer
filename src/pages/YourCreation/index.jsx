@@ -8,7 +8,7 @@ import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { Note } from "../../components/Note";
 
-import { Container, Content, Wrapper } from "./styles";
+import { Container, Wrapper, Content, Scrollbar } from "./styles";
 
 export function YourCreation() {
   const [search, setSearch] = useState("");
@@ -44,25 +44,25 @@ export function YourCreation() {
           onChange={(e) => setSearch(e.target.value)}
         />
       </Header>
-
-      <Content>
+      <Scrollbar>
         <Wrapper>
-          <h1>Your Character's Ranking</h1>
+          <h1>Your Character's</h1>
 
           <button type="button" onClick={handleBack}>
             <FiArrowLeft />
             Back
           </button>
         </Wrapper>
-
-        {notesFiltered.map((note) => (
-          <Note
-            key={String(note.id)}
-            data={note}
-            onClick={() => handleDetails(note.id)}
-          />
-        ))}
-      </Content>
+        <Content>
+          {notesFiltered.map((note) => (
+            <Note
+              key={String(note.id)}
+              data={note}
+              onClick={() => handleDetails(note.id)}
+            />
+          ))}
+        </Content>
+      </Scrollbar>
     </Container>
   );
 }

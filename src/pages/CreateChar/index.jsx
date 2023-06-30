@@ -25,16 +25,16 @@ export function CreateChar() {
 
       <Content>
         <div>
-          <h2>GOOD</h2>
+          <h2 className="good">GOOD</h2>
           <Link to="/createhashira">
-            <img src={hashiras} alt="good way photo" />
+            <img src={hashiras} alt="good way image" />
           </Link>
         </div>
 
         <div>
-          <h2>EVIL</h2>
+          <h2 className="evil">EVIL</h2>
           <Link to="/createoni">
-            <img src={onis} alt="bad way photo" />
+            <img src={onis} alt="bad way image" />
           </Link>
         </div>
       </Content>

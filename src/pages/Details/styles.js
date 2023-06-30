@@ -9,18 +9,17 @@ export const Container = styled.div`
 `;
 
 export const Content = styled.div`
-  margin: 0 144px 10px 144px;
+  margin: 0 144px;
   padding: 30px 40px 40px 40px;
 
-  background-color: black;
-  border-radius: 0 0 10px 10px;
+  background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
 
   img {
-    width: 50%;
-    height: 440px;
-    border: 1px solid white;
-
+    width: 400px;
+    height: 400px;
     object-fit: cover;
+
+    border: 1px solid white;
   }
 `;
 
@@ -43,6 +42,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Infos = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -51,6 +51,15 @@ export const Infos = styled.div`
 
   > h2 {
     margin-top: 20px;
+  }
+
+  .skills {
+    position: absolute;
+    right: 10px;
+
+    a {
+      color: ${({ theme }) => theme.COLORS.PINK};
+    }
   }
 `;
 

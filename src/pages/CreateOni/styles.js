@@ -83,9 +83,8 @@ export const CharImage = styled.div`
 
   label {
     padding: 20px;
-    margin-bottom: 20px;
 
-    width: 200px;
+    width: 150px;
 
     display: flex;
     align-items: center;
@@ -103,6 +102,8 @@ export const CharImage = styled.div`
 
   img {
     width: 20%;
+
+    margin-top: 20px;
   }
 `;
 

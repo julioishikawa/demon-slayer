@@ -84,19 +84,24 @@ export function Details() {
               <span>Height: {data.height} cm</span>
               <span>Weight: {data.weight} kg</span>
               <span>Style: {data.style}</span>
+
+              <h2>Skills</h2>
               {data.skills && (
                 <div>
-                  <span>
-                    Skills: {data.skills.map((item) => item.name).join(", ")}
+                  {data.skills.map((item) => item.name).join(", ")}
+
+                  <span className="skills">
+                    <br />
+                    for skills details search{" "}
+                    <a href="https://google.com" target="_blank">
+                      here
+                    </a>
                   </span>
                 </div>
               )}
 
               <h2>About</h2>
               <p>{data.description}</p>
-
-              <h2>Goals</h2>
-              <p>{data.goals}</p>
 
               <h2>Title's</h2>
               {data.titles && (

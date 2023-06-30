@@ -20,7 +20,6 @@ export function CreateOni() {
   const [weight, setWeight] = useState("");
   const [description, setDescription] = useState("");
   const [style, setStyle] = useState("");
-  const [goals, setGoals] = useState("");
 
   const avatarURL = `${api.defaults.baseURL}/files/${null}`;
   const [avatar, setAvatar] = useState(avatarURL);
@@ -31,13 +30,13 @@ export function CreateOni() {
   const [titles, setTitles] = useState([]);
   const [newTitle, setNewTitle] = useState("");
 
-  const isAgeValid = (age >= 4 && age <= 799) || age === "?";
-  const isHeightValid = (height >= 0.1 && height <= 50) || height === "?";
+  const isAgeValid = (age >= 4 && age <= 1000) || age === "?";
+  const isHeightValid = (height >= 0.1 && height <= 30) || height === "?";
   const isWeightValid = (weight >= 10 && weight <= 999) || weight === "?";
   const isTitleValid =
-    (newTitle.length >= 3 && newTitle.length <= 20) || newTitle === "?";
+    (newTitle.length >= 3 && newTitle.length <= 50) || newTitle === "?";
   const isSkillValid =
-    (newSkill.length >= 3 && newSkill.length <= 20) || newSkill === "?";
+    (newSkill.length >= 3 && newSkill.length <= 50) || newSkill === "?";
 
   const navigate = useNavigate();
 
@@ -65,7 +64,7 @@ export function CreateOni() {
     }
 
     if (!isSkillValid) {
-      return alert("Your skill must be between 3 and 20 letters.");
+      return alert("Your skill must be between 3 and 50 letters.");
     }
 
     setSkills((prevState) => [...prevState, newSkill]);
@@ -79,7 +78,7 @@ export function CreateOni() {
     }
 
     if (!isTitleValid) {
-      return alert("Your skill must be between 3 and 20 letters.");
+      return alert("Your skill must be between 3 and 50 letters.");
     }
 
     setTitles((prevState) => [...prevState, newTitle]);
@@ -100,19 +99,18 @@ export function CreateOni() {
       !height ||
       !weight ||
       !description ||
-      !style ||
-      !goals
+      !style
     ) {
       return alert("Please fill in all fields to complete your character.");
     }
 
     if (!isAgeValid) {
-      return alert("Your age must be between 4 and 799 years old.");
+      return alert("Your age must be between 4 and 1000 years old.");
     }
 
     if (!isHeightValid) {
       return alert(
-        "Your height must be between 0.100 milimeters and 50 meters."
+        "Your height must be between 0.100 milimeters and 30 meters."
       );
     }
 
@@ -151,7 +149,6 @@ export function CreateOni() {
       style,
       skills,
       titles,
-      goals,
     });
 
     const fileUploadForm = new FormData();
@@ -243,12 +240,6 @@ export function CreateOni() {
             <Textarea
               placeholder="About"
               onChange={(e) => setDescription(e.target.value)}
-            />
-
-            <Textarea
-              placeholder="Goals"
-              clasName="goals"
-              onChange={(e) => setGoals(e.target.value)}
             />
 
             <div>

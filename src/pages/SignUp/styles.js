@@ -33,7 +33,17 @@ export const Content = styled.div`
 
   > h1 {
     font-size: 48px;
-    color: ${({ theme }) => theme.COLORS.PINK};
+
+    background-image: linear-gradient(
+      45deg,
+      #ff859b,
+      #ff859b,
+      #e80a0a,
+      #e80a0a
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
   > h2 {

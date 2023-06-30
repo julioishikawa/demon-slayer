@@ -72,6 +72,8 @@ export function Home() {
         `/notes?name=${search}&titles=${tagsSelected}`
       );
 
+      console.log(response);
+
       setNotes(response.data);
     }
 
@@ -88,7 +90,7 @@ export function Home() {
             onMouseLeave={onMouseLeave}
           >
             <h3 className="nav-links">
-              Rankings
+              Menu
               <FiChevronDown />
             </h3>
 
@@ -127,11 +129,11 @@ export function Home() {
       </List>
 
       <Scrollbar>
-        <Content>
-          <Wrapper>
-            <h1>Characters</h1>
-          </Wrapper>
+        <Wrapper>
+          <h1>Characters</h1>
+        </Wrapper>
 
+        <Content>
           {notes.map((note) => (
             <Note
               key={String(note.id)}

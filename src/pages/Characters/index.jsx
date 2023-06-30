@@ -8,7 +8,7 @@ import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { Note } from "../../components/Note";
 
-import { Container, Content, Wrapper } from "./styles";
+import { Container, Wrapper, Content, Scrollbar } from "./styles";
 
 export function Characters() {
   const [search, setSearch] = useState("");
@@ -45,9 +45,9 @@ export function Characters() {
         />
       </Header>
 
-      <Content>
+      <Scrollbar>
         <Wrapper>
-          <h1>Character's Ranking</h1>
+          <h1>Character's</h1>
 
           <button type="button" onClick={handleBack}>
             <FiArrowLeft />
@@ -55,14 +55,16 @@ export function Characters() {
           </button>
         </Wrapper>
 
-        {notesFiltered.map((note) => (
-          <Note
-            key={String(note.id)}
-            data={note}
-            onClick={() => handleDetails(note.id)}
-          />
-        ))}
-      </Content>
+        <Content>
+          {notesFiltered.map((note) => (
+            <Note
+              key={String(note.id)}
+              data={note}
+              onClick={() => handleDetails(note.id)}
+            />
+          ))}
+        </Content>
+      </Scrollbar>
     </Container>
   );
 }

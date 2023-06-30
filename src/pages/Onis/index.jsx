@@ -8,13 +8,13 @@ import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { Note } from "../../components/Note";
 
-import { Container, Content, Wrapper } from "./styles";
+import { Container, Wrapper, Content, Scrollbar } from "./styles";
 
 export function Onis() {
   const [search, setSearch] = useState("");
   const [notes, setNotes] = useState([]);
 
-  const notesFiltered = notes.filter((note) => note.id >= 10 && note.id <= 20);
+  const notesFiltered = notes.filter((note) => note.id > 14 && note.id <= 20);
 
   const navigate = useNavigate();
 
@@ -45,9 +45,9 @@ export function Onis() {
         />
       </Header>
 
-      <Content>
+      <Scrollbar>
         <Wrapper>
-          <h1>Upper Moon's Ranking</h1>
+          <h1>Upper Moon's</h1>
 
           <button type="button" onClick={handleBack}>
             <FiArrowLeft />
@@ -55,14 +55,16 @@ export function Onis() {
           </button>
         </Wrapper>
 
-        {notesFiltered.map((note) => (
-          <Note
-            key={String(note.id)}
-            data={note}
-            onClick={() => handleDetails(note.id)}
-          />
-        ))}
-      </Content>
+        <Content>
+          {notesFiltered.map((note) => (
+            <Note
+              key={String(note.id)}
+              data={note}
+              onClick={() => handleDetails(note.id)}
+            />
+          ))}
+        </Content>
+      </Scrollbar>
     </Container>
   );
 }

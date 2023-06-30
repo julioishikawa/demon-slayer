@@ -51,11 +51,12 @@ export const Rankings = styled.nav`
 
     color: ${({ theme }) => theme.COLORS.PINK};
     text-decoration: none;
+
+    transition: filter 0.3s;
   }
 
   .nav-links:hover {
     filter: brightness(0.9);
-    transition: filter 0.3s;
   }
 `;
 
@@ -103,6 +104,21 @@ export const Content = styled.div`
   align-items: center;
 
   gap: 20px;
+
+  transition: animation 500ms;
+  animation: downtop 500ms;
+
+  @keyframes downtop {
+    0% {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 `;
 
 export const NewChar = styled(Link)`

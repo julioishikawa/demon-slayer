@@ -12,16 +12,16 @@ export const Container = styled.button`
   border: none;
   border-radius: 16px;
 
-  
   > img {
-      width: 30%;
-      height: 222px;
-      border-radius: 10px 0 0 10px;
-      object-fit: cover;
-    }
+    width: 222px;
+    height: 222px;
+    border-radius: 10px 0 0 10px;
+    object-fit: cover;
+  }
 `;
 
 export const Content = styled.div`
+  width: 100%;
   padding: 32px;
 
   > h1 {
@@ -36,7 +36,7 @@ export const Content = styled.div`
 
   > p {
     margin: 15px 0 30px 0;
-    
+
     max-height: 53px;
 
     text-align: left;
@@ -45,11 +45,10 @@ export const Content = styled.div`
 
     overflow: hidden;
     text-overflow: ellipsis;
-    
+
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-
 
     color: ${({ theme }) => theme.COLORS.GRAY_500};
   }
@@ -60,4 +59,4 @@ export const Content = styled.div`
     display: flex;
     margin-top: 24px;
   }
-`
+`;

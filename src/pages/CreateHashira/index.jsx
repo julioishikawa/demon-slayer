@@ -20,7 +20,6 @@ export function CreateHashira() {
   const [weight, setWeight] = useState("");
   const [description, setDescription] = useState("");
   const [style, setStyle] = useState("");
-  const [goals, setGoals] = useState("");
 
   const avatarURL = `${api.defaults.baseURL}/files/${null}`;
   const [avatar, setAvatar] = useState(avatarURL);
@@ -31,13 +30,13 @@ export function CreateHashira() {
   const [titles, setTitles] = useState([]);
   const [newTitle, setNewTitle] = useState("");
 
-  const isAgeValid = (age >= 18 && age <= 40) || age === "?";
+  const isAgeValid = (age >= 10 && age <= 80) || age === "?";
   const isHeightValid = (height >= 1 && height <= 3) || height === "?";
-  const isWeightValid = (weight >= 40 && weight <= 595) || weight === "?";
+  const isWeightValid = (weight >= 35 && weight <= 500) || weight === "?";
   const isTitleValid =
-    (newTitle.length >= 3 && newTitle.length <= 20) || newTitle === "?";
+    (newTitle.length >= 3 && newTitle.length <= 50) || newTitle === "?";
   const isSkillValid =
-    (newSkill.length >= 3 && newSkill.length <= 20) || newSkill === "?";
+    (newSkill.length >= 3 && newSkill.length <= 50) || newSkill === "?";
 
   const navigate = useNavigate();
 
@@ -65,7 +64,7 @@ export function CreateHashira() {
     }
 
     if (!isSkillValid) {
-      return alert("Your skill must be between 3 and 20 letters.");
+      return alert("Your skill must be between 3 and 50 letters.");
     }
 
     setSkills((prevState) => [...prevState, newSkill]);
@@ -79,7 +78,7 @@ export function CreateHashira() {
     }
 
     if (!isTitleValid) {
-      return alert("Your skill must be between 3 and 20 letters.");
+      return alert("Your skill must be between 3 and 50 letters.");
     }
 
     setTitles((prevState) => [...prevState, newTitle]);
@@ -108,15 +107,14 @@ export function CreateHashira() {
       !height ||
       !weight ||
       !description ||
-      !style ||
-      !goals
+      !style
     ) {
       return alert("Please fill in all fields to complete your character.");
     }
 
     if (!isAgeValid) {
       return alert(
-        "Your minimum age must be 18 and maximum age must be 40 years old."
+        "Your minimum age must be 10 and maximum age must be 80 years old."
       );
     }
 
@@ -125,16 +123,16 @@ export function CreateHashira() {
     }
 
     if (!isWeightValid) {
-      return alert("Your weight must be between 40 and 595 kilograms.");
+      return alert("Your weight must be between 35 and 500 kilograms.");
     }
 
     if (skills.length === 0) {
-      return alert("You need to create a ability for your character.");
+      return alert("You need to create a technique for your character.");
     }
 
     if (newSkill) {
       return alert(
-        'You left one ability in the field to be add. Please click in the "+" button to add it or left the field empty.'
+        'You left one technique in the field to be add. Please click in the "+" button to add it or left the field empty.'
       );
     }
 
@@ -159,7 +157,6 @@ export function CreateHashira() {
       style,
       skills,
       titles,
-      goals,
     });
 
     const fileUploadForm = new FormData();
@@ -189,7 +186,7 @@ export function CreateHashira() {
         <main>
           <Form>
             <header>
-              <h1>New Hashira</h1>
+              <h1>Have fun!</h1>
             </header>
 
             <div className="infos">
@@ -224,12 +221,12 @@ export function CreateHashira() {
 
             <h2>Style</h2>
             <Input
-              placeholder="Example: Flame's Breathing"
+              placeholder="Example: Flame Breathing"
               onChange={(e) => setStyle(e.target.value)}
             />
 
             <div>
-              <h2>Skills</h2>
+              <h2>Techniques</h2>
               <div className="tags">
                 {skills.map((tag, index) => (
                   <NoteItem
@@ -240,7 +237,7 @@ export function CreateHashira() {
                 ))}
                 <NoteItem
                   isNew
-                  placeholder="Example: Dancing Flaming"
+                  placeholder="Example: Unknowing Fire"
                   onChange={(e) => setNewSkill(e.target.value)}
                   value={newSkill}
                   onClick={handleAddSkill}
@@ -251,12 +248,6 @@ export function CreateHashira() {
             <Textarea
               placeholder="About"
               onChange={(e) => setDescription(e.target.value)}
-            />
-
-            <Textarea
-              placeholder="Goals"
-              clasName="goals"
-              onChange={(e) => setGoals(e.target.value)}
             />
 
             <div>
@@ -271,7 +262,7 @@ export function CreateHashira() {
                 ))}
                 <NoteItem
                   isNew
-                  placeholder="Example: Hashira's Flame"
+                  placeholder="Example: Flame Hashira"
                   onChange={(e) => setNewTitle(e.target.value)}
                   value={newTitle}
                   onClick={handleAddTitle}
