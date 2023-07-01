@@ -14,7 +14,10 @@ export function Onis() {
   const [search, setSearch] = useState("");
   const [notes, setNotes] = useState([]);
 
-  const notesFiltered = notes.filter((note) => note.id > 14 && note.id <= 20);
+  const demonsLeader = notes.filter((note) => note.id === 15);
+  const demonsUpper = notes.filter((note) => note.id >= 16 && note.id <= 18);
+  const demonsLower = notes.filter((note) => note.id >= 23 && note.id <= 29);
+  const demonsDead = notes.filter((note) => note.id >= 19 && note.id <= 22);
 
   const navigate = useNavigate();
 
@@ -47,7 +50,7 @@ export function Onis() {
 
       <Scrollbar>
         <Wrapper>
-          <h1>Upper Moon's</h1>
+          <h1>Demon's Leader</h1>
 
           <button type="button" onClick={handleBack}>
             <FiArrowLeft />
@@ -56,7 +59,37 @@ export function Onis() {
         </Wrapper>
 
         <Content>
-          {notesFiltered.map((note) => (
+          {demonsLeader.map((note) => (
+            <Note
+              key={String(note.id)}
+              data={note}
+              onClick={() => handleDetails(note.id)}
+            />
+          ))}
+        </Content>
+
+        <Content>
+          <h1>Demon's Alive</h1>
+          {demonsUpper.map((note) => (
+            <Note
+              key={String(note.id)}
+              data={note}
+              onClick={() => handleDetails(note.id)}
+            />
+          ))}
+        </Content>
+
+        <Content>
+          <h1>Dead Demon's</h1>
+          {demonsDead.map((note) => (
+            <Note
+              key={String(note.id)}
+              data={note}
+              onClick={() => handleDetails(note.id)}
+            />
+          ))}
+
+          {demonsLower.map((note) => (
             <Note
               key={String(note.id)}
               data={note}

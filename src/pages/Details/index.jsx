@@ -15,6 +15,7 @@ import {
 
 import { Header } from "../../components/Header";
 import { TagTitle } from "../../components/TagTitle";
+import { TagSkill } from "../../components/TagSkill";
 
 export function Details() {
   const [data, setData] = useState(null);
@@ -85,17 +86,19 @@ export function Details() {
               <span>Weight: {data.weight} kg</span>
               <span>Style: {data.style}</span>
 
-              <h2>Skills</h2>
+              <h2>Techniques</h2>
               {data.skills && (
                 <div>
-                  {data.skills.map((item) => item.name).join(", ")}
+                  {data.skills.map((tag) => (
+                    <TagSkill key={tag.id} name={tag.name} />
+                  ))}
 
                   <span className="skills">
-                    <br />
                     for skills details search{" "}
                     <a href="https://google.com" target="_blank">
                       here
                     </a>
+                    <br />
                   </span>
                 </div>
               )}

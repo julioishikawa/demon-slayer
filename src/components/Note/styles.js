@@ -13,7 +13,7 @@ export const Container = styled.button`
   border-radius: 16px;
 
   > img {
-    width: 222px;
+    width: 65%;
     height: 222px;
     border-radius: 10px 0 0 10px;
     object-fit: cover;

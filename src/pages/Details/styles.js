@@ -15,8 +15,8 @@ export const Content = styled.div`
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND_500};
 
   img {
-    width: 400px;
-    height: 400px;
+    width: 500px;
+    height: 500px;
     object-fit: cover;
 
     border: 1px solid white;

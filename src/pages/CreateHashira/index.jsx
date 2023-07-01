@@ -186,7 +186,7 @@ export function CreateHashira() {
         <main>
           <Form>
             <header>
-              <h1>Have fun!</h1>
+              <h1>New Human</h1>
             </header>
 
             <div className="infos">

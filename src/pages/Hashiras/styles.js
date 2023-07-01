@@ -32,7 +32,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Content = styled.div`
-  padding: 20px 144px 40px;
+  padding: 20px 144px;
 
   display: flex;
   flex-direction: column;

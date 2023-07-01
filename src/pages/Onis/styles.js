@@ -16,6 +16,8 @@ export const Wrapper = styled.div`
 
   padding: 40px 144px 0;
 
+  margin-bottom: 20px;
+
   button {
     display: flex;
     align-items: center;
@@ -31,11 +33,15 @@ export const Wrapper = styled.div`
 `;
 
 export const Content = styled.div`
-  padding: 40px 144px;
+  padding: 20px 144px;
 
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  h1 {
+    margin-bottom: 20px;
+  }
 
   transition: animation 500ms;
   animation: downtop 500ms;

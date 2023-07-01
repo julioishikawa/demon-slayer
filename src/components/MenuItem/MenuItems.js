@@ -11,7 +11,7 @@ export const MenuItems = [
   },
 
   {
-    title: "Oni's",
+    title: "Twelve Kizuki's",
     path: "/onis",
     cName: "dropdown-link",
   },

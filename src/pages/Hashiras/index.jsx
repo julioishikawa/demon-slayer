@@ -14,10 +14,10 @@ export function Hashiras() {
   const [search, setSearch] = useState("");
   const [notes, setNotes] = useState([]);
 
-  const notesFiltered = notes.filter((note) => note.id <= 8);
-  const notesFormerFiltered = notes.filter(
-    (note) => note.id > 8 && note.id <= 14
-  );
+  const hashirasLeader = notes.filter((note) => note.id === 1);
+  const hashirasAlive = notes.filter((note) => note.id >= 2 && note.id <= 8);
+  const formerHashiras = notes.filter((note) => note.id >= 11 && note.id <= 14);
+  const hashirasDead = notes.filter((note) => note.id >= 9 && note.id <= 10);
 
   const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ export function Hashiras() {
 
       <Scrollbar>
         <Wrapper>
-          <h1>Hashira's</h1>
+          <h1>Hashira's Leader</h1>
 
           <button type="button" onClick={handleBack}>
             <FiArrowLeft />
@@ -59,7 +59,18 @@ export function Hashiras() {
         </Wrapper>
 
         <Content>
-          {notesFiltered.map((note) => (
+          {hashirasLeader.map((note) => (
+            <Note
+              key={String(note.id)}
+              data={note}
+              onClick={() => handleDetails(note.id)}
+            />
+          ))}
+        </Content>
+
+        <Content>
+          <h1>Hashira's Alive</h1>
+          {hashirasAlive.map((note) => (
             <Note
               key={String(note.id)}
               data={note}
@@ -70,7 +81,18 @@ export function Hashiras() {
 
         <Content>
           <h1>Former Hashira's</h1>
-          {notesFormerFiltered.map((note) => (
+          {formerHashiras.map((note) => (
+            <Note
+              key={String(note.id)}
+              data={note}
+              onClick={() => handleDetails(note.id)}
+            />
+          ))}
+        </Content>
+
+        <Content>
+          <h1>Dead Hashira's</h1>
+          {hashirasDead.map((note) => (
             <Note
               key={String(note.id)}
               data={note}

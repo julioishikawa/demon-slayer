@@ -14,7 +14,7 @@ export function YourCreation() {
   const [search, setSearch] = useState("");
   const [notes, setNotes] = useState([]);
 
-  const notesFiltered = notes.filter((note) => note.id >= 20);
+  const notesFiltered = notes.filter((note) => note.id >= 50);
 
   const navigate = useNavigate();
 

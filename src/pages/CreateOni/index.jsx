@@ -36,7 +36,7 @@ export function CreateOni() {
   const isTitleValid =
     (newTitle.length >= 3 && newTitle.length <= 50) || newTitle === "?";
   const isSkillValid =
-    (newSkill.length >= 3 && newSkill.length <= 50) || newSkill === "?";
+    (newSkill.length >= 3 && newSkill.length <= 60) || newSkill === "?";
 
   const navigate = useNavigate();
 
@@ -64,7 +64,7 @@ export function CreateOni() {
     }
 
     if (!isSkillValid) {
-      return alert("Your skill must be between 3 and 50 letters.");
+      return alert("Your skill must be between 3 and 60 letters.");
     }
 
     setSkills((prevState) => [...prevState, newSkill]);
@@ -86,8 +86,16 @@ export function CreateOni() {
     setNewTitle("");
   }
 
-  function handleRemoveTag(tagDeleted) {
-    setTags((prevState) => prevState.filter((tag) => tag.id !== tagDeleted.id));
+  function handleRemoveSkill(skillDeleted) {
+    setSkills((prevState) =>
+      prevState.filter((skill) => skill !== skillDeleted)
+    );
+  }
+
+  function handleRemoveTitle(titleDeleted) {
+    setTitles((prevState) =>
+      prevState.filter((title) => title !== titleDeleted)
+    );
   }
 
   async function handleNewNote() {
@@ -178,7 +186,7 @@ export function CreateOni() {
         <main>
           <Form>
             <header>
-              <h1>New Oni</h1>
+              <h1>New Demon</h1>
             </header>
 
             <div className="infos">
@@ -211,25 +219,25 @@ export function CreateOni() {
               />
             </div>
 
-            <h2>Style</h2>
+            <h2>Style / Kekkijutsu</h2>
             <Input
               placeholder="Example: Blood Demon Art"
               onChange={(e) => setStyle(e.target.value)}
             />
 
             <div>
-              <h2>Skills</h2>
+              <h2>Techniques</h2>
               <div className="tags">
                 {skills.map((tag, index) => (
                   <NoteItem
                     key={String(index)}
                     value={tag}
-                    onClick={() => handleRemoveTag(tag)}
+                    onClick={() => handleRemoveSkill(tag)}
                   />
                 ))}
                 <NoteItem
                   isNew
-                  placeholder="Example: Dancing Flaming"
+                  placeholder="Example: Compass Needle"
                   onChange={(e) => setNewSkill(e.target.value)}
                   value={newSkill}
                   onClick={handleAddSkill}
@@ -249,12 +257,12 @@ export function CreateOni() {
                   <NoteItem
                     key={String(index)}
                     value={tag}
-                    onClick={() => handleRemoveTag(tag)}
+                    onClick={() => handleRemoveTitle(tag)}
                   />
                 ))}
                 <NoteItem
                   isNew
-                  placeholder="Example: Hashira's Flame"
+                  placeholder="Example: Upper Moon Three"
                   onChange={(e) => setNewTitle(e.target.value)}
                   value={newTitle}
                   onClick={handleAddTitle}

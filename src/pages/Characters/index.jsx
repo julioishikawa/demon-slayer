@@ -14,7 +14,7 @@ export function Characters() {
   const [search, setSearch] = useState("");
   const [notes, setNotes] = useState([]);
 
-  const notesFiltered = notes.filter((note) => note.id <= 10);
+  const notesFiltered = notes.filter((note) => note.id >= null);
 
   const navigate = useNavigate();
 
