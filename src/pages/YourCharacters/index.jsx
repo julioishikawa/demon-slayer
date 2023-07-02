@@ -1,20 +1,19 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FiSearch, FiArrowLeft } from "react-icons/fi";
+import { FiArrowLeft } from "react-icons/fi";
 
 import { api } from "../../services/api";
 
 import { Header } from "../../components/Header";
-import { Input } from "../../components/Input";
 import { Note } from "../../components/Note";
 
 import { Container, Wrapper, Content, Scrollbar } from "./styles";
 
-export function YourCreation() {
+export function YourCharacters() {
   const [search, setSearch] = useState("");
   const [notes, setNotes] = useState([]);
 
-  const notesFiltered = notes.filter((note) => note.id >= 50);
+  const notesFiltered = notes.filter((note) => note.id > 39);
 
   const navigate = useNavigate();
 
@@ -37,13 +36,8 @@ export function YourCreation() {
 
   return (
     <Container>
-      <Header>
-        <Input
-          placeholder="Search"
-          icon={FiSearch}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </Header>
+      <Header />
+
       <Scrollbar>
         <Wrapper>
           <h1>Your Character's</h1>

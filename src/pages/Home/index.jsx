@@ -72,8 +72,6 @@ export function Home() {
         `/notes?name=${search}&titles=${tagsSelected}`
       );
 
-      console.log(response);
-
       setNotes(response.data);
     }
 

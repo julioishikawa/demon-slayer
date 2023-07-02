@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FiSearch, FiArrowLeft } from "react-icons/fi";
+import { FiArrowLeft } from "react-icons/fi";
 
 import { api } from "../../services/api";
 
 import { Header } from "../../components/Header";
-import { Input } from "../../components/Input";
 import { Note } from "../../components/Note";
 
 import { Container, Wrapper, Content, Scrollbar } from "./styles";
@@ -40,17 +39,11 @@ export function Onis() {
 
   return (
     <Container>
-      <Header>
-        <Input
-          placeholder="Search"
-          icon={FiSearch}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </Header>
+      <Header />
 
       <Scrollbar>
         <Wrapper>
-          <h1>Demon's Leader</h1>
+          <h1>Demons Leader</h1>
 
           <button type="button" onClick={handleBack}>
             <FiArrowLeft />
@@ -69,7 +62,7 @@ export function Onis() {
         </Content>
 
         <Content>
-          <h1>Demon's Alive</h1>
+          <h1>Demons Alive</h1>
           {demonsUpper.map((note) => (
             <Note
               key={String(note.id)}
@@ -80,7 +73,7 @@ export function Onis() {
         </Content>
 
         <Content>
-          <h1>Dead Demon's</h1>
+          <h1>Dead Demons</h1>
           {demonsDead.map((note) => (
             <Note
               key={String(note.id)}

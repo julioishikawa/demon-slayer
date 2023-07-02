@@ -26,7 +26,7 @@ export function CreateChar() {
       <Content>
         <div>
           <h2 className="good">GOOD</h2>
-          <Link to="/createhashira">
+          <Link to="/createhuman">
             <img src={hashiras} alt="good way image" />
           </Link>
         </div>

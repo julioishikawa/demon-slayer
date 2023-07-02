@@ -11,7 +11,7 @@ import { Button } from "../../components/Button";
 
 import { Container, Form, CharImage, Scrollbar } from "./styles";
 
-export function CreateHashira() {
+export function CreateHuman() {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
@@ -34,9 +34,8 @@ export function CreateHashira() {
   const isHeightValid = (height >= 1 && height <= 3) || height === "?";
   const isWeightValid = (weight >= 35 && weight <= 500) || weight === "?";
   const isTitleValid =
-    (newTitle.length >= 3 && newTitle.length <= 50) || newTitle === "?";
-  const isSkillValid =
-    (newSkill.length >= 3 && newSkill.length <= 50) || newSkill === "?";
+    (newTitle.length >= 3 && newTitle.length <= 30) || newTitle === "?";
+  const isSkillValid = newSkill.length >= 3 || newSkill === "?";
 
   const navigate = useNavigate();
 
@@ -60,11 +59,11 @@ export function CreateHashira() {
 
   function handleAddSkill() {
     if (!newSkill) {
-      return alert("You need to put a value to add a ability.");
+      return alert("You need to put a value to add a technique.");
     }
 
     if (!isSkillValid) {
-      return alert("Your skill must be between 3 and 50 letters.");
+      return alert("Your technique name must have more than 3 letters.");
     }
 
     setSkills((prevState) => [...prevState, newSkill]);
@@ -74,11 +73,11 @@ export function CreateHashira() {
 
   function handleAddTitle() {
     if (!newTitle) {
-      return alert("You need to put a value to add a ability.");
+      return alert("You need to put a value to add a title.");
     }
 
     if (!isTitleValid) {
-      return alert("Your skill must be between 3 and 50 letters.");
+      return alert("Your title must be between 3 and 30 letters.");
     }
 
     setTitles((prevState) => [...prevState, newTitle]);
@@ -165,7 +164,7 @@ export function CreateHashira() {
     await api.patch(`/notes/avatar/${note.data.id}`, fileUploadForm);
 
     alert("Character added successfully!");
-    navigate("/hashiras");
+    navigate("/yourcharacters");
   }
 
   function handleDiscardChar() {
@@ -262,7 +261,7 @@ export function CreateHashira() {
                 ))}
                 <NoteItem
                   isNew
-                  placeholder="Example: Flame Hashira"
+                  placeholder="Example: Demon Slayer Corps"
                   onChange={(e) => setNewTitle(e.target.value)}
                   value={newTitle}
                   onClick={handleAddTitle}

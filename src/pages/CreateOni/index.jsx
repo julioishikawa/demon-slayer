@@ -34,9 +34,8 @@ export function CreateOni() {
   const isHeightValid = (height >= 0.1 && height <= 30) || height === "?";
   const isWeightValid = (weight >= 10 && weight <= 999) || weight === "?";
   const isTitleValid =
-    (newTitle.length >= 3 && newTitle.length <= 50) || newTitle === "?";
-  const isSkillValid =
-    (newSkill.length >= 3 && newSkill.length <= 60) || newSkill === "?";
+    (newTitle.length >= 3 && newTitle.length <= 30) || newTitle === "?";
+  const isSkillValid = newSkill.length >= 3 || newSkill === "?";
 
   const navigate = useNavigate();
 
@@ -60,11 +59,11 @@ export function CreateOni() {
 
   function handleAddSkill() {
     if (!newSkill) {
-      return alert("You need to put a value to add a ability.");
+      return alert("You need to put a value to add a technique.");
     }
 
     if (!isSkillValid) {
-      return alert("Your skill must be between 3 and 60 letters.");
+      return alert("Your technique name must have more than 3 letters.");
     }
 
     setSkills((prevState) => [...prevState, newSkill]);
@@ -74,11 +73,11 @@ export function CreateOni() {
 
   function handleAddTitle() {
     if (!newTitle) {
-      return alert("You need to put a value to add a ability.");
+      return alert("You need to put a value to add a title.");
     }
 
     if (!isTitleValid) {
-      return alert("Your skill must be between 3 and 50 letters.");
+      return alert("Your title must be between 3 and 30 letters.");
     }
 
     setTitles((prevState) => [...prevState, newTitle]);
@@ -165,7 +164,7 @@ export function CreateOni() {
     await api.patch(`/notes/avatar/${note.data.id}`, fileUploadForm);
 
     alert("Character added successfully!");
-    navigate("/onis");
+    navigate("/yourcharacters");
   }
 
   function handleDiscardMovie() {

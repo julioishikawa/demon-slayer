@@ -5,18 +5,18 @@ export const MenuItems = [
     cName: "dropdown-link",
   },
   {
-    title: "Hashira's",
+    title: "Hashiras",
     path: "/hashiras",
     cName: "dropdown-link",
   },
 
   {
-    title: "Twelve Kizuki's",
+    title: "Twelve Kizukis",
     path: "/onis",
     cName: "dropdown-link",
   },
   {
-    title: "Your's creation",
+    title: "Yours Characters",
     path: "/yourcharacters",
     cName: "dropdown-link",
   },
