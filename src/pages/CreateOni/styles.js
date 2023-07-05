@@ -50,7 +50,7 @@ export const Form = styled.form`
     border-radius: 8px;
 
     input {
-      width: 230px;
+      width: 100%;
     }
   }
 

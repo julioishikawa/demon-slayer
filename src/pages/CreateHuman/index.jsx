@@ -6,6 +6,7 @@ import { api } from "../../services/api";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { Textarea } from "../../components/Textarea";
+import { TechniqueItem } from "../../components/TechniqueItem";
 import { NoteItem } from "../../components/NoteItem";
 import { Button } from "../../components/Button";
 
@@ -109,6 +110,10 @@ export function CreateHuman() {
       !style
     ) {
       return alert("Please fill in all fields to complete your character.");
+    }
+
+    if (!avatarFile) {
+      return alert("Please upload an image for your character.");
     }
 
     if (!isAgeValid) {
@@ -228,13 +233,13 @@ export function CreateHuman() {
               <h2>Techniques</h2>
               <div className="tags">
                 {skills.map((tag, index) => (
-                  <NoteItem
+                  <TechniqueItem
                     key={String(index)}
                     value={tag}
                     onClick={() => handleRemoveSkill(tag)}
                   />
                 ))}
-                <NoteItem
+                <TechniqueItem
                   isNew
                   placeholder="Example: Unknowing Fire"
                   onChange={(e) => setNewSkill(e.target.value)}

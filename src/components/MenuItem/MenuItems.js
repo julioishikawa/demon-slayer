@@ -16,8 +16,8 @@ export const MenuItems = [
     cName: "dropdown-link",
   },
   {
-    title: "Yours Characters",
-    path: "/yourcharacters",
+    title: "Community Characters",
+    path: "/communitycharacters",
     cName: "dropdown-link",
   },
 ];

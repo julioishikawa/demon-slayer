@@ -6,6 +6,7 @@ import { api } from "../../services/api";
 import { Header } from "../../components/Header";
 import { Input } from "../../components/Input";
 import { Textarea } from "../../components/Textarea";
+import { TechniqueItem } from "../../components/TechniqueItem";
 import { NoteItem } from "../../components/NoteItem";
 import { Button } from "../../components/Button";
 
@@ -111,6 +112,10 @@ export function CreateOni() {
       return alert("Please fill in all fields to complete your character.");
     }
 
+    if (!avatarFile) {
+      return alert("Please upload an image for your character.");
+    }
+
     if (!isAgeValid) {
       return alert("Your age must be between 4 and 1000 years old.");
     }
@@ -126,12 +131,12 @@ export function CreateOni() {
     }
 
     if (skills.length === 0) {
-      return alert("You need to create a ability for your character.");
+      return alert("You need to create a technique for your character.");
     }
 
     if (newSkill) {
       return alert(
-        'You left one ability in the field to be add. Please click in the "+" button to add it or left the field empty.'
+        'You left one technique in the field to be add. Please click in the "+" button to add it or left the field empty.'
       );
     }
 
@@ -228,13 +233,13 @@ export function CreateOni() {
               <h2>Techniques</h2>
               <div className="tags">
                 {skills.map((tag, index) => (
-                  <NoteItem
+                  <TechniqueItem
                     key={String(index)}
                     value={tag}
                     onClick={() => handleRemoveSkill(tag)}
                   />
                 ))}
-                <NoteItem
+                <TechniqueItem
                   isNew
                   placeholder="Example: Compass Needle"
                   onChange={(e) => setNewSkill(e.target.value)}
