@@ -8,7 +8,6 @@ import { CreateOni } from "../pages/CreateOni";
 import { Hashiras } from "../pages/Hashiras";
 import { Onis } from "../pages/Onis";
 import { Details } from "../pages/Details";
-import { EditChar } from "../pages/EditChar";
 import { Profile } from "../pages/Profile";
 import { CommunityChar } from "../pages/CommunityChar";
 
@@ -21,7 +20,6 @@ export function AppRoutes() {
       <Route path="/createhuman" element={<CreateHuman />} />
       <Route path="/createoni" element={<CreateOni />} />
       <Route path="/details/:id" element={<Details />} />
-      <Route path="/edit/:id" element={<EditChar />} />
       <Route path="/hashiras" element={<Hashiras />} />
       <Route path="/onis" element={<Onis />} />
       <Route path="/profile" element={<Profile />} />
