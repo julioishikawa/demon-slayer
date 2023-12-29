@@ -4,14 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { api } from "../../services/api";
 
-import {
-  Container,
-  Wrapper,
-  Content,
-  Infos,
-  Delete,
-  Scrollbar,
-} from "./styles";
+import { Container, Wrapper, Content, Infos, Scrollbar } from "./styles";
 
 import { Header } from "../../components/Header";
 import { TagTitle } from "../../components/TagTitle";
@@ -28,25 +21,6 @@ export function Details() {
 
   function handleBack() {
     navigate(-1);
-  }
-
-  async function handleRemove() {
-    try {
-      const confirm = window.confirm(
-        "Are you sure you want to remove this character?"
-      );
-
-      if (confirm) {
-        await api.delete(`/notes/${params.id}`);
-        navigate(-1);
-      }
-    } catch (e) {
-      if (e.response) {
-        alert(e.response.data.message);
-      } else {
-        alert("Could not do that.");
-      }
-    }
   }
 
   useEffect(() => {
@@ -114,12 +88,6 @@ export function Details() {
                   ))}
                 </div>
               )}
-
-              <Delete>
-                <button className="delete" type="button" onClick={handleRemove}>
-                  Remove character
-                </button>
-              </Delete>
             </Infos>
           </Content>
         </Scrollbar>

@@ -11,7 +11,7 @@ import { Container, Form, Background, Content } from "./styles";
 
 export function SignUp() {
   const [name, setName] = useState("");
-  const [email , setEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
@@ -21,18 +21,25 @@ export function SignUp() {
       return alert("Please fill in all fields to complete your registration.");
     }
 
-    api.post("/users", { name, email, password })
+    api
+      .post("/users", { name, email, password })
       .then(() => {
         alert("Registration successful!");
         navigate(-1);
       })
-      .catch(error => {
+      .catch((error) => {
         if (error.response) {
           alert(error.response.data.message);
         } else {
           alert("Registration failed!");
         }
       });
+  }
+
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      handleSignUp();
+    }
   }
 
   function handleBack() {
@@ -50,11 +57,29 @@ export function SignUp() {
             <h2>Create your account</h2>
 
             <div>
-              <Input placeholder="Name" type="text" icon={FiUser} onChange={e => setName(e.target.value)} />
+              <Input
+                placeholder="Name"
+                type="text"
+                icon={FiUser}
+                onChange={(e) => setName(e.target.value)}
+                onKeyDown={handleKeyDown}
+              />
 
-              <Input placeholder="E-mail" type="text" icon={FiMail} onChange={e => setEmail(e.target.value)} />
+              <Input
+                placeholder="E-mail"
+                type="text"
+                icon={FiMail}
+                onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={handleKeyDown}
+              />
 
-              <Input placeholder="Password" type="password" icon={FiLock} onChange={e => setPassword(e.target.value)} />
+              <Input
+                placeholder="Password"
+                type="password"
+                icon={FiLock}
+                onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={handleKeyDown}
+              />
             </div>
 
             <Button title="Register" onClick={handleSignUp} />

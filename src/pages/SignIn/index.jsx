@@ -18,7 +18,13 @@ export function SignIn() {
   function handleSignIn() {
     signIn({ email, password });
   }
-  
+
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      handleSignIn();
+    }
+  }
+
   return (
     <Container>
       <Background>
@@ -30,9 +36,21 @@ export function SignIn() {
             <h2>Login</h2>
 
             <div>
-              <Input placeholder="E-mail" type="text" icon={FiMail} onChange={e => setEmail(e.target.value)} />
+              <Input
+                placeholder="E-mail"
+                type="text"
+                icon={FiMail}
+                onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={handleKeyDown}
+              />
 
-              <Input placeholder="Password" type="password" icon={FiLock} onChange={e => setPassword(e.target.value)} />
+              <Input
+                placeholder="Password"
+                type="password"
+                icon={FiLock}
+                onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={handleKeyDown}
+              />
             </div>
 
             <Button title="Sign In" onClick={handleSignIn} />

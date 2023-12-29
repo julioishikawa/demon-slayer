@@ -21,7 +21,9 @@ export function Profile() {
   const [passwordOld, setPasswordOld] = useState("");
   const [passwordNew, setPasswordNew] = useState("");
 
-  const avatarURL = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder;
+  const avatarURL = user.avatar
+    ? `${api.defaults.baseURL}/files/${user.avatar}`
+    : avatarPlaceholder;
   const [avatar, setAvatar] = useState(avatarURL);
   const [avatarFile, setAvatarFile] = useState(null);
 
@@ -31,11 +33,17 @@ export function Profile() {
       email,
       old_password: passwordOld,
       password: passwordNew,
-    }
+    };
 
     const userUpdate = Object.assign(user, updated);
 
     await updateProfile({ user: userUpdate, avatarFile });
+  }
+
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      handleUpdate();
+    }
   }
 
   function handleChangeAvatar(e) {
@@ -51,7 +59,7 @@ export function Profile() {
   function handleBack() {
     navigate("/");
   }
-  
+
   return (
     <Container>
       <header>
@@ -72,13 +80,39 @@ export function Profile() {
           </label>
         </Avatar>
 
-        <Input placeholder="Nome do usuário" type="text" icon={FiUser} value={name} onChange={e => setName(e.target.value)} />
+        <Input
+          placeholder="Nome do usuário"
+          type="text"
+          icon={FiUser}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
 
-        <Input placeholder="E-mail" type="text" icon={FiMail} value={email} onChange={e => setEmail(e.target.value)} />
+        <Input
+          placeholder="E-mail"
+          type="text"
+          icon={FiMail}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
 
-        <Input placeholder="Senha atual" type="password" icon={FiLock} onChange={e => setPasswordOld(e.target.value)} />
+        <Input
+          placeholder="Senha atual"
+          type="password"
+          icon={FiLock}
+          onChange={(e) => setPasswordOld(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
 
-        <Input placeholder="Nova senha" type="password" icon={FiLock} onChange={e => setPasswordNew(e.target.value)} />
+        <Input
+          placeholder="Nova senha"
+          type="password"
+          icon={FiLock}
+          onChange={(e) => setPasswordNew(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
 
         <Button title="Salvar" onClick={handleUpdate} />
       </Form>

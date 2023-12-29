@@ -169,7 +169,7 @@ export function CreateOni() {
     await api.patch(`/notes/avatar/${note.data.id}`, fileUploadForm);
 
     alert("Character added successfully!");
-    navigate("/yourcharacters");
+    navigate("/communitycharacters");
   }
 
   function handleDiscardMovie() {
