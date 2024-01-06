@@ -31,9 +31,8 @@ export function CreateHuman() {
   const [titles, setTitles] = useState([]);
   const [newTitle, setNewTitle] = useState("");
 
-  const isAgeValid = (age >= 10 && age <= 80) || age === "?";
-  const isHeightValid = (height >= 1 && height <= 3) || height === "?";
-  const isWeightValid = (weight >= 35 && weight <= 500) || weight === "?";
+  const isAgeValid = age >= 10 && age <= 100;
+  const isWeightValid = weight >= 35 && weight <= 500;
   const isTitleValid =
     (newTitle.length >= 3 && newTitle.length <= 30) || newTitle === "?";
   const isSkillValid = newSkill.length >= 3 || newSkill === "?";
@@ -58,6 +57,37 @@ export function CreateHuman() {
     setAvatar(imagePreview);
   }
 
+  function formatNumber(value) {
+    const numericValue = value
+      .toString()
+      .replace(/[^0-9]/g, "")
+      .slice(0, 3);
+
+    return numericValue || "";
+  }
+
+  function formatHeight(value) {
+    const heightValue = value
+      .toString()
+      .replace(/[^0-9]/g, "")
+      .slice(0, 3);
+
+    if (heightValue.length === 3) {
+      const integerPart = heightValue.slice(0, 1);
+      const decimalPart = heightValue.slice(1);
+
+      return `${integerPart}.${decimalPart}` || "";
+    } else {
+      return heightValue || "";
+    }
+  }
+
+  const formattedHeight = formatHeight(height);
+  const isHeightValid =
+    formattedHeight >= 1 &&
+    formattedHeight <= 3 &&
+    formattedHeight.length === 4;
+
   function handleAddSkill() {
     if (!newSkill) {
       return alert("You need to put a value to add a technique.");
@@ -70,6 +100,18 @@ export function CreateHuman() {
     setSkills((prevState) => [...prevState, newSkill]);
 
     setNewSkill("");
+  }
+
+  function handleKeyDownSkill(e) {
+    if (e.key === "Enter") {
+      handleAddSkill();
+    }
+  }
+
+  function handleRemoveSkill(skillDeleted) {
+    setSkills((prevState) =>
+      prevState.filter((skill) => skill !== skillDeleted)
+    );
   }
 
   function handleAddTitle() {
@@ -86,10 +128,10 @@ export function CreateHuman() {
     setNewTitle("");
   }
 
-  function handleRemoveSkill(skillDeleted) {
-    setSkills((prevState) =>
-      prevState.filter((skill) => skill !== skillDeleted)
-    );
+  function handleKeyDownTitle(e) {
+    if (e.key === "Enter") {
+      handleAddTitle();
+    }
   }
 
   function handleRemoveTitle(titleDeleted) {
@@ -123,7 +165,7 @@ export function CreateHuman() {
     }
 
     if (!isHeightValid) {
-      return alert("Your height must be between 1 and 3 meters.");
+      return alert("Your height must be between 1 and 3 meters. Example: 1.82");
     }
 
     if (!isWeightValid) {
@@ -155,7 +197,7 @@ export function CreateHuman() {
       age,
       gender,
       form,
-      height,
+      height: formattedHeight,
       weight,
       description,
       style,
@@ -194,40 +236,74 @@ export function CreateHuman() {
             </header>
 
             <div className="infos">
-              <Input
-                placeholder="Name"
-                onChange={(e) => setName(e.target.value)}
-              />
-              <Input
-                placeholder="Age"
-                onChange={(e) => Number(setAge(e.target.value))}
-              />
-              <Input
-                placeholder="Gender"
-                onChange={(e) => setGender(e.target.value)}
-              />
+              <div className="box">
+                <h2>Name</h2>
+
+                <Input
+                  placeholder="Lorem"
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+
+              <div className="box">
+                <h2>Age</h2>
+
+                <Input
+                  placeholder="22"
+                  value={formatNumber(age)}
+                  onChange={(e) => setAge(e.target.value)}
+                  maxLength="3"
+                />
+              </div>
+
+              <div className="box">
+                <h2>Gender</h2>
+
+                <Input
+                  placeholder="Male"
+                  onChange={(e) => setGender(e.target.value)}
+                />
+              </div>
             </div>
 
             <div className="infos">
-              <Input
-                placeholder="Form"
-                onChange={(e) => setForm(e.target.value)}
-              />
-              <Input
-                placeholder="Height"
-                onChange={(e) => setHeight(e.target.value)}
-              />
-              <Input
-                placeholder="Weight"
-                onChange={(e) => setWeight(e.target.value)}
-              />
+              <div className="box">
+                <h2>Form</h2>
+
+                <Input
+                  placeholder="Human"
+                  onChange={(e) => setForm(e.target.value)}
+                />
+              </div>
+
+              <div className="box">
+                <h2>Height</h2>
+
+                <Input
+                  placeholder="1.82"
+                  value={formatHeight(height)}
+                  onChange={(e) => setHeight(e.target.value)}
+                />
+              </div>
+
+              <div className="box">
+                <h2>Weight</h2>
+                <Input
+                  placeholder="76"
+                  value={formatNumber(weight)}
+                  onChange={(e) => setWeight(e.target.value)}
+                  maxLength="3"
+                />
+              </div>
             </div>
 
-            <h2>Style</h2>
-            <Input
-              placeholder="Example: Flame Breathing"
-              onChange={(e) => setStyle(e.target.value)}
-            />
+            <div className="box">
+              <h2>Style</h2>
+              <Input
+                placeholder="Example: Flame Breathing"
+                onChange={(e) => setStyle(e.target.value)}
+              />
+            </div>
 
             <div>
               <h2>Techniques</h2>
@@ -245,6 +321,7 @@ export function CreateHuman() {
                   onChange={(e) => setNewSkill(e.target.value)}
                   value={newSkill}
                   onClick={handleAddSkill}
+                  onKeyDown={handleKeyDownSkill}
                 />
               </div>
             </div>
@@ -270,6 +347,7 @@ export function CreateHuman() {
                   onChange={(e) => setNewTitle(e.target.value)}
                   value={newTitle}
                   onClick={handleAddTitle}
+                  onKeyDown={handleKeyDownTitle}
                 />
               </div>
             </div>

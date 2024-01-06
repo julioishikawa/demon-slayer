@@ -8,7 +8,7 @@ export const Container = styled.div`
   flex-direction: column;
 
   main {
-    margin: 0 344px;
+    margin: 0 244px;
     padding: 0 16px 0 0;
   }
 `;
@@ -31,6 +31,14 @@ export const Form = styled.form`
     gap: 30px;
   }
 
+  .box {
+    width: 100%;
+
+    h2 {
+      margin-bottom: 8px;
+    }
+  }
+
   h2 {
     font-size: 20px;
     font-weight: 400;
@@ -43,7 +51,7 @@ export const Form = styled.form`
     flex-wrap: wrap;
     gap: 24px;
 
-    margin-top: 24px;
+    margin-top: 8px;
     padding: 16px;
 
     background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};

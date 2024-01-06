@@ -56,7 +56,7 @@ export function Details() {
               <span>Age: {data.age}</span>
               <span>Gender: {data.gender}</span>
               <span>Form: {data.form}</span>
-              <span>Height: {data.height} cm</span>
+              <span>Height: {data.height} cm/meters</span>
               <span>Weight: {data.weight} kg</span>
               <span>Style: {data.style}</span>
 
