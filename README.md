@@ -44,4 +44,4 @@ $ npm run dev
 
 A aplicação está online para testes: https://demon-slayer-app.netlify.app/
 
-Feito por [shuharib0t](https://www.linkedin.com/in/julio-ishikawa-449417213/) 👋.
+Feito por [Julio Ishikawa](https://www.linkedin.com/in/julio-ishikawa-449417213/) 👋.
