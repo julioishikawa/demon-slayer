@@ -36,7 +36,7 @@ O conteúdo a seguir contém spoilers sobre o anime Kimetsu no Yaiba(Demon Slaye
 ## Instalação 💡
 
 ```
-$ git clone https://github.com/shuharib0t/demon-slayer.git
+$ git clone https://github.com/julioishikawa/demon-slayer.git
 $ cd demon-slayer
 $ npm install
 $ npm run dev
@@ -44,4 +44,4 @@ $ npm run dev
 
 A aplicação está online para testes: https://demon-slayer-app.netlify.app/
 
-Feito por [Julio Ishikawa](https://www.linkedin.com/in/julio-ishikawa/) 👋.
+Feito por [Julio Ishikawa](https://www.linkedin.com/in/julio-ishikawa) 👋.
